@@ -2,9 +2,9 @@
 
 ## 功能
 
-- 增加 [Elasticsearch 查询函数](../3.ngql-guide/6.functions-and-expressions/17.ES-function.md)，支持向独立部署的 Elasticsearch 发送 GET 请求读取数据。
+- 增加 [Elasticsearch 查询函数](../../3.ngql-guide/6.functions-and-expressions/17.ES-function.md)，支持向独立部署的 Elasticsearch 发送 GET 请求读取数据。
 
-- 增加 [extract() 函数](../3.ngql-guide/6.functions-and-expressions/2.string.md)。
+- 增加 [extract() 函数](../../3.ngql-guide/6.functions-and-expressions/2.string.md)。
 
 ## 优化
 
@@ -63,6 +63,12 @@
 - 修复集群内时区不同的缺陷。 [#4391](https://github.com/vesoft-inc/nebula/pull/4391)
 
 - 修复删除全文索引时崩溃的问题。 [#4384](https://github.com/vesoft-inc/nebula/pull/4384)
+
+- 修复当发送 PUT 请求，请求体为空时，服务崩溃的问题。[#4405](https://github.com/vesoft-inc/nebula/pull/4405)
+
+- 修复当在有索引的基础上删除点和边时，语句中的 VID 的长度超出定义的长度时，Storage 服务崩溃的问题。[#4406](https://github.com/vesoft-inc/nebula/pull/4406)
+
+
 
 ## 历史版本
 
