@@ -126,7 +126,7 @@ extra:
   # Google Analytics.
   analytics:
     provider: google
-    property: UA-60523578-15
+    property: UA-60523578-7
   # branch represents code names (git clone). release represents version number used in texts.
   version:
     method: mike
@@ -188,13 +188,13 @@ extra:
     branch: release-3.2
     tag: v3.2.0
   dashboard:
-    release: 3.0.0
-    tag: v3.0.0
+    release: 3.1.0
+    tag: v3.1.0
     base100: 1.0.0
     branch: release-3.0
   dashboard_ent:
-    release: 3.1.0
-    tag: v3.1.0
+    release: 3.1.2
+    tag: v3.1.2
     branch: release-3.1
   console:
     release: 3.0.0
@@ -439,7 +439,7 @@ nav:
 
       - 升级版本:
           - 升级 NebulaGraph 版本: 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest.md
-#          - 升级 v2.0.x 至当前版本: 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-from-200-to-latest.md
+          - 升级 v3.0.x 至当前版本: 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-from-300-to-latest.md
       - 卸载 NebulaGraph: 4.deployment-and-installation/4.uninstall-nebula-graph.md
 
   - 配置与日志:
