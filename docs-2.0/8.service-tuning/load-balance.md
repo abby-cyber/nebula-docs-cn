@@ -31,8 +31,8 @@
     +-----------------+------+-----------+----------+--------------+-----------------------+------------------------+-------------+
     | Host            | Port | HTTP port | Status   | Leader count | Leader distribution   | Partition distribution | Version     |
     +-----------------+------+-----------+----------+--------------+-----------------------+------------------------+-------------+
-    | "192.168.8.101" | 9779 | 19669     | "ONLINE" | 0            | "No valid partition"  | "No valid partition"   | "3.1.0-ent" |
-    | "192.168.8.100" | 9779 | 19669     | "ONLINE" | 15           | "basketballplayer:15" | "basketballplayer:15"  | "3.1.0-ent" |
+    | "192.168.8.101" | 9779 | 19779     | "ONLINE" | 0            | "No valid partition"  | "No valid partition"   | "3.1.0-ent" |
+    | "192.168.8.100" | 9779 | 19779     | "ONLINE" | 15           | "basketballplayer:15" | "basketballplayer:15"  | "3.1.0-ent" |
     +-----------------+------+-----------+----------+--------------+-----------------------+------------------------+-------------+
     ```
 
@@ -78,8 +78,8 @@
   +-----------------+------+-----------+----------+--------------+----------------------+------------------------+-------------+
   | Host            | Port | HTTP port | Status   | Leader count | Leader distribution  | Partition distribution | Version     |
   +-----------------+------+-----------+----------+--------------+----------------------+------------------------+-------------+
-  | "192.168.8.101" | 9779 | 19669     | "ONLINE" | 7            | "basketballplayer:7" | "basketballplayer:7"   | "3.1.0-ent" |
-  | "192.168.8.100" | 9779 | 19669     | "ONLINE" | 8            | "basketballplayer:8" | "basketballplayer:8"   | "3.1.0-ent" |
+  | "192.168.8.101" | 9779 | 19779     | "ONLINE" | 7            | "basketballplayer:7" | "basketballplayer:7"   | "3.1.0-ent" |
+  | "192.168.8.100" | 9779 | 19779     | "ONLINE" | 8            | "basketballplayer:8" | "basketballplayer:8"   | "3.1.0-ent" |
   +-----------------+------+-----------+----------+--------------+----------------------+------------------------+-------------+
   ```
 
@@ -118,8 +118,8 @@ nebula> SHOW HOSTS;
 +-----------------+------+-----------+----------+--------------+-----------------------+------------------------+-------------+
 | Host            | Port | HTTP port | Status   | Leader count | Leader distribution   | Partition distribution | Version     |
 +-----------------+------+-----------+----------+--------------+-----------------------+------------------------+-------------+
-| "192.168.8.101" | 9779 | 19669     | "ONLINE" | 15           | "basketballplayer:15" | "basketballplayer:15"  | "3.1.0-ent" |
-| "192.168.8.100" | 9779 | 19669     | "ONLINE" | 0            | "No valid partition"  | "No valid partition"   | "3.1.0-ent" |
+| "192.168.8.101" | 9779 | 19779     | "ONLINE" | 15           | "basketballplayer:15" | "basketballplayer:15"  | "3.1.0-ent" |
+| "192.168.8.100" | 9779 | 19779     | "ONLINE" | 0            | "No valid partition"  | "No valid partition"   | "3.1.0-ent" |
 +-----------------+------+-----------+----------+--------------+-----------------------+------------------------+-------------+
 ```
 
@@ -127,7 +127,7 @@ nebula> SHOW HOSTS;
 
     该命令仅迁移分片，不会将 Storage 主机从集群中删除。删除 Storage 主机请参见[管理 Storage 主机](../4.deployment-and-installation/manage-storage-host.md)。
 
-/* 下面是注释内容
+<!-- 下面是注释内容
 !!! danger
 
     `BALANCE`命令通过创建和执行一组子任务来迁移数据和均衡分片分布，不要停止集群中的任何机器或改变机器的 IP 地址，直到所有子任务完成，否则后续子任务会失败。
@@ -153,12 +153,12 @@ nebula> SHOW HOSTS;
   +------------------+------+-----------+----------+--------------+-----------------------------------+------------------------+---------+
   | Host             | Port | HTTP port | Status   | Leader count | Leader distribution               | Partition distribution | Version |
   +------------------+------+-----------+----------+--------------+-----------------------------------+------------------------+---------+
-  | "192.168.10.100" | 9779 | 19669     | "ONLINE" | 4            | "basketballplayer:4"              | "basketballplayer:15"  | "3.1.0" |
-  | "192.168.10.101" | 9779 | 19669     | "ONLINE" | 8            | "basketballplayer:8"              | "basketballplayer:15"  | "3.1.0" |
-  | "192.168.10.102" | 9779 | 19669     | "ONLINE" | 3            | "basketballplayer:3"              | "basketballplayer:15"  | "3.1.0" |
-  | "192.168.10.103" | 9779 | 19669     | "ONLINE" | 0            | "No valid partition"              | "No valid partition"   | "3.1.0" |
-  | "192.168.10.104" | 9779 | 19669     | "ONLINE" | 0            | "No valid partition"              | "No valid partition"   | "3.1.0" |
-  | "192.168.10.105" | 9779 | 19669     | "ONLINE" | 0            | "No valid partition"              | "No valid partition"   | "3.1.0" |
+  | "192.168.10.100" | 9779 | 19779     | "ONLINE" | 4            | "basketballplayer:4"              | "basketballplayer:15"  | "3.1.0" |
+  | "192.168.10.101" | 9779 | 19779     | "ONLINE" | 8            | "basketballplayer:8"              | "basketballplayer:15"  | "3.1.0" |
+  | "192.168.10.102" | 9779 | 19779     | "ONLINE" | 3            | "basketballplayer:3"              | "basketballplayer:15"  | "3.1.0" |
+  | "192.168.10.103" | 9779 | 19779     | "ONLINE" | 0            | "No valid partition"              | "No valid partition"   | "3.1.0" |
+  | "192.168.10.104" | 9779 | 19779     | "ONLINE" | 0            | "No valid partition"              | "No valid partition"   | "3.1.0" |
+  | "192.168.10.105" | 9779 | 19779     | "ONLINE" | 0            | "No valid partition"              | "No valid partition"   | "3.1.0" |
   +------------------+------+-----------+----------+--------------+-----------------------------------+------------------------+---------+
   ```
 
@@ -200,12 +200,12 @@ nebula> SHOW HOSTS;
   +------------------+------+-----------+----------+--------------+-----------------------------------+------------------------+---------+
   | Host             | Port | HTTP port | Status   | Leader count | Leader distribution               | Partition distribution | Version |
   +------------------+------+-----------+----------+--------------+-----------------------------------+------------------------+---------+
-  | "192.168.10.100" | 9779 | 19669     | "ONLINE" | 4            | "basketballplayer:4"              | "basketballplayer:8"   | "3.1.0" |
-  | "192.168.10.101" | 9779 | 19669     | "ONLINE" | 8            | "basketballplayer:8"              | "basketballplayer:8"   | "3.1.0" |
-  | "192.168.10.102" | 9779 | 19669     | "ONLINE" | 3            | "basketballplayer:3"              | "basketballplayer:8"   | "3.1.0" |
-  | "192.168.10.103" | 9779 | 19669     | "ONLINE" | 0            | "No valid partition"              | "basketballplayer:7"   | "3.1.0" |
-  | "192.168.10.104" | 9779 | 19669     | "ONLINE" | 0            | "No valid partition"              | "basketballplayer:7"   | "3.1.0" |
-  | "192.168.10.105" | 9779 | 19669     | "ONLINE" | 0            | "No valid partition"              | "basketballplayer:7"   | "3.1.0" |
+  | "192.168.10.100" | 9779 | 19779     | "ONLINE" | 4            | "basketballplayer:4"              | "basketballplayer:8"   | "3.1.0" |
+  | "192.168.10.101" | 9779 | 19779     | "ONLINE" | 8            | "basketballplayer:8"              | "basketballplayer:8"   | "3.1.0" |
+  | "192.168.10.102" | 9779 | 19779     | "ONLINE" | 3            | "basketballplayer:3"              | "basketballplayer:8"   | "3.1.0" |
+  | "192.168.10.103" | 9779 | 19779     | "ONLINE" | 0            | "No valid partition"              | "basketballplayer:7"   | "3.1.0" |
+  | "192.168.10.104" | 9779 | 19779     | "ONLINE" | 0            | "No valid partition"              | "basketballplayer:7"   | "3.1.0" |
+  | "192.168.10.105" | 9779 | 19779     | "ONLINE" | 0            | "No valid partition"              | "basketballplayer:7"   | "3.1.0" |
   +------------------+------+-----------+----------+--------------+-----------------------------------+------------------------+---------+
   ```
 
@@ -250,7 +250,7 @@ nebula> SHOW HOSTS;
   ```ngql
   nebula> DROP HOSTS 192.168.10.104:9779,192.168.10.105:9779;
   ```
-*/
+-->
 
 {{ ent.ent_end }}
 
@@ -271,12 +271,12 @@ nebula> SHOW HOSTS;
 +------------------+------+-----------+----------+--------------+-----------------------------------+------------------------+---------+
 | Host             | Port | HTTP port | Status   | Leader count | Leader distribution               | Partition distribution | Version |
 +------------------+------+-----------+----------+--------------+-----------------------------------+------------------------+---------+
-| "192.168.10.100" | 9779 | 19669     | "ONLINE" | 4            | "basketballplayer:3"              | "basketballplayer:8"   | "3.1.0" |
-| "192.168.10.101" | 9779 | 19669     | "ONLINE" | 8            | "basketballplayer:3"              | "basketballplayer:8"   | "3.1.0" |
-| "192.168.10.102" | 9779 | 19669     | "ONLINE" | 3            | "basketballplayer:3"              | "basketballplayer:8"   | "3.1.0" |
-| "192.168.10.103" | 9779 | 19669     | "ONLINE" | 0            | "basketballplayer:2"              | "basketballplayer:7"   | "3.1.0" |
-| "192.168.10.104" | 9779 | 19669     | "ONLINE" | 0            | "basketballplayer:2"              | "basketballplayer:7"   | "3.1.0" |
-| "192.168.10.105" | 9779 | 19669     | "ONLINE" | 0            | "basketballplayer:2"              | "basketballplayer:7"   | "3.1.0" |
+| "192.168.10.100" | 9779 | 19779     | "ONLINE" | 4            | "basketballplayer:3"              | "basketballplayer:8"   | "3.1.0" |
+| "192.168.10.101" | 9779 | 19779     | "ONLINE" | 8            | "basketballplayer:3"              | "basketballplayer:8"   | "3.1.0" |
+| "192.168.10.102" | 9779 | 19779     | "ONLINE" | 3            | "basketballplayer:3"              | "basketballplayer:8"   | "3.1.0" |
+| "192.168.10.103" | 9779 | 19779     | "ONLINE" | 0            | "basketballplayer:2"              | "basketballplayer:7"   | "3.1.0" |
+| "192.168.10.104" | 9779 | 19779     | "ONLINE" | 0            | "basketballplayer:2"              | "basketballplayer:7"   | "3.1.0" |
+| "192.168.10.105" | 9779 | 19779     | "ONLINE" | 0            | "basketballplayer:2"              | "basketballplayer:7"   | "3.1.0" |
 +------------------+------+-----------+----------+--------------+-----------------------------------+------------------------+---------+
 ```
 
