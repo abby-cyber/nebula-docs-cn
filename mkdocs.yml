@@ -90,6 +90,7 @@ plugins:
 #       - synchronization-and-migration/replication-between-clusters.md
 #       - 20.appendix/8.about-license/
 #       - nebula-dashboard-ent/4.cluster-operator/operator/scale.md
+#       - 6.monitor-and-metrics/3.bbox
         # end
         
 
@@ -245,6 +246,10 @@ extra:
     release: 3.1.2
     branch: release-3.1
     tag: v3.1.2
+  bbox:
+    release: 3.3.0
+    branch: release-3.3
+    tag: v3.3.0
   cloud:
     azureRelease: 3.1.1 # Azure云兼容的最新内核版本
     aliyunRelease: 3.1.1 # 阿里云兼容的最新内核版本
@@ -471,6 +476,11 @@ nav:
   - 监控:
       - 查询 NebulaGraph 监控指标: 6.monitor-and-metrics/1.query-performance-metrics.md
       - RocksDB 统计数据: 6.monitor-and-metrics/2.rocksdb-statistics.md
+#ent
+      - 黑匣子:
+        - 黑匣子介绍: 6.monitor-and-metrics/3.bbox/3.1.bbox.md
+        - Nebula-BBox 工具: 6.monitor-and-metrics/3.bbox/3.2.bbox-reviewer.md
+        - 黑匣子指标: 6.monitor-and-metrics/3.bbox/3.3.bbox-metrics.md
 
   - 数据安全:
       - 验证和授权:
@@ -583,6 +593,7 @@ nav:
         - 集群信息: 
           - 信息总览: nebula-dashboard-ent/4.cluster-operator/cluster-information/overview-info.md
           - 集群诊断: nebula-dashboard-ent/4.cluster-operator/cluster-information/cluster-diagnosis.md
+          - 集群作业管理: nebula-dashboard-ent/4.cluster-operator/cluster-information/job-management.md
           - 备份恢复: nebula-dashboard-ent/4.cluster-operator/cluster-information/backup-and-restore.md
         - 集群操作: 
           - 节点管理: nebula-dashboard-ent/4.cluster-operator/operator/node.md
@@ -615,6 +626,7 @@ nav:
       - Schema 管理: nebula-explorer/db-management/10.create-schema.md
       - 数据导入: nebula-explorer/db-management/11.import-data.md
       - 控制台: nebula-explorer/db-management/explorer-console.md
+      - 查询语句模板: nebula-explorer/db-management/ngql-template.md
     - 图探索:
       - 选择图空间: nebula-explorer/graph-explorer/13.choose-graphspace.md
       - 开始探索: nebula-explorer/graph-explorer/ex-ug-query-exploration.md
