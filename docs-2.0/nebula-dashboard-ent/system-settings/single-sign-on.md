@@ -44,4 +44,4 @@ NebulaGraph Dashboard 企业版支持普通账户、LDAP 账户和 OAuth2.0 账�
 |`UserInfoURL` | `https://www.googleapis.com/oauth2/v1/userinfo`| 获取用户信息的 URL。 |
 |`Username Key` | `email`| 用户名字段。 |
 |`Organization` |  `vesoft company`       |  组织名称。             |
-|`Requested scopes for OAuth`| `email`| OAuth 的权限范围。权限范围需要是厂商 OAuth2.0 平台配置的 scope 的子集，否则请求会失败。请求的 scope 需要能获取到 `Username Key`的值。|
+|`OAuth权限范围`| `email`| OAuth 的权限范围。权限范围需要是厂商 OAuth2.0 平台配置的 scope 的子集，否则请求会失败。请求的 scope 需要能获取到 `Username Key`的值。|

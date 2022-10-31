@@ -58,8 +58,10 @@
 | `delete_edges_latency_us`      | 删除边的延迟时间。                                  |
 | `delete_vertices_latency_us`   | 删除点的延迟时间。                                  |
 | `get_neighbors_latency_us`     | 查询邻居延迟时间。                                  |
+| `get_dst_by_src_latency_us`    | 通过起始点获取终点的延迟时间。 |
 | `num_get_prop`                 | GetPropProcessor 执行的次数。                       |
 | `num_get_neighbors_errors`     | GetNeighborsProcessor 执行出错的次数。               |
+| `num_get_dst_by_src_errors`    | GetDstBySrcProcessor 执行出错的次数。 |
 | `get_prop_latency_us`          | GetPropProcessor 执行的延迟时间。|
 | `num_edges_deleted`            | 删除的边数量。                                      |
 | `num_edges_inserted`           | 插入的边数量。                                      |
@@ -111,6 +113,7 @@
 | `delete_tags_latency_us`       | 删除 Tag 的延迟时间。                 |
 | `num_update_edge_errors`       | UpdateEdgeProcessor 执行时出错的次数。                  |
 | `num_get_neighbors`            | GetNeighborsProcessor 执行的次数。                  |
+| `num_get_dst_by_src`           | GetDstBySrcProcessor 执行的次数。 |
 | `num_get_prop_errors`          | GetPropProcessor 执行时出错的次数。                  |
 | `num_delete_vertices`          | 删除点的次数。                  |
 | `num_lookup`                   | LookupProcessor 执行的次数。                  |
