@@ -76,6 +76,7 @@ plugins:
         - spark-connector/*
         - 4.deployment-and-installation/5.zone.md
         - 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-from-200-to-latest.md
+        - nebula-dashboard-ent/4.cluster-operator/cluster-information/job-management.md
         # 仅发布包含企业版功能的文档版本时，注释以下页面
         # begin
 #       - 3.ngql-guide/6.functions-and-expressions/17.ES-function.md
@@ -144,7 +145,7 @@ extra:
     base20: 2.0
     base200: 2.0.0
     branch: release-3.3
-    tag: V3.3.0
+    tag: v3.3.0
   studio:
     base111b: 1.1.1-beta
     base220: 2.2.1
@@ -564,7 +565,7 @@ nav:
         - 操作 Tag: nebula-studio/manage-schema/st-ug-crud-tag.md
         - 操作 Edge type: nebula-studio/manage-schema/st-ug-crud-edge-type.md
         - 操作索引: nebula-studio/manage-schema/st-ug-crud-index.md
-       - Schema 草图: nebula-studio/quick-start/draft.md
+      - Schema 草图: nebula-studio/quick-start/draft.md
     - 故障排查:
       - 连接数据库错误: nebula-studio/troubleshooting/st-ug-config-server-errors.md
       - 无法访问 Studio: nebula-studio/troubleshooting/st-ug-connection-errors.md
@@ -591,7 +592,7 @@ nav:
         - 集群信息: 
           - 信息总览: nebula-dashboard-ent/4.cluster-operator/cluster-information/overview-info.md
           - 集群诊断: nebula-dashboard-ent/4.cluster-operator/cluster-information/cluster-diagnosis.md
-          - 集群作业管理: nebula-dashboard-ent/4.cluster-operator/cluster-information/job-management.md
+#          - 集群作业管理: nebula-dashboard-ent/4.cluster-operator/cluster-information/job-management.md
           - 备份恢复: nebula-dashboard-ent/4.cluster-operator/cluster-information/backup-and-restore.md
         - 集群操作: 
           - 节点管理: nebula-dashboard-ent/4.cluster-operator/operator/node.md
@@ -683,6 +684,7 @@ nav:
       - 导入 MaxCompute 数据: nebula-exchange/use-exchange/ex-ug-import-from-maxcompute.md
       - 导入 Pulsar 数据: nebula-exchange/use-exchange/ex-ug-import-from-pulsar.md
       - 导入 Kafka 数据: nebula-exchange/use-exchange/ex-ug-import-from-kafka.md
+      - 导入通用 JDBC 数据: nebula-exchange/use-exchange/ex-ug-import-from-jdbc.md
       - 导入 SST 文件数据: nebula-exchange/use-exchange/ex-ug-import-from-sst.md
       - 导出 NebulaGraph 数据: nebula-exchange/use-exchange/ex-ug-export-from-nebula.md
     - Exchange 常见问题: nebula-exchange/ex-ug-FAQ.md
@@ -707,14 +709,10 @@ nav:
   - 图计算:
 
     - 算法简介: graph-computing/algorithm-description.md
-
     - NebulaGraph Algorithm: graph-computing/nebula-algorithm.md
-
-#ent
-#ent    - NebulaGraph Analytics: graph-computing/nebula-analytics.md
-
-#ent
-#ent    - NebulaGraph Explorer 工作流: graph-computing/use-explorer.md
+    - NebulaGraph Analytics: graph-computing/nebula-analytics.md
+    - NebulaGraph Analytics License: graph-computing/analytics-ent-license.md
+    - NebulaGraph Explorer 工作流: graph-computing/use-explorer.md
 
   - NebulaGraph Spark Connector: nebula-spark-connector.md
       

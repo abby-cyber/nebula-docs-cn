@@ -4,7 +4,7 @@ NebulaGraph Explorer （简称 Explorer）是一款可以通过 Web 访问的可
 
 !!! enterpriseonly
 
-    如需获取 Nebula Explorer 安装包，请发送邮件至 inquiry@vesoft.com。
+    如需获取 Nebula Explorer 安装包，请[联系我们](https://www.nebula-graph.com.cn/contact)。
 
 !!! Note
 
@@ -32,7 +32,7 @@ NebulaGraph Explorer （简称 Explorer）是一款可以通过 Web 访问的可
 
 - [数据存储](../canvas-operations/canvas-snapshot.md)：支持保存和导入画布数据。
 
-- [内联框架](../nebula-explorer/iframe.md)：支持在第三方页面中嵌入 Explorer 画布。
+- [内联框架](../iframe.md)：支持在第三方页面中嵌入 Explorer 画布。
 
 <!-- - 便于筛选：支持基于自定义条件灵活筛选需要展示的数据。-->
 
