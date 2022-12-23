@@ -1,14 +1,16 @@
 本文介绍如何使用原生命令行客户端 Nebula Console 连接 NebulaGraph。
 
+<!--本文中的链接必须用外链，因为这篇文档是复用的，用内部链接会出错。-->
+
 !!! caution
 
-    首次连接到 NebulaGraph 后，必须先[注册 Storage 服务](https://docs.nebula-graph.com.cn/{{nebula.release}}/2.quick-start/3.quick-start-on-premise/3.1add-storage-hosts.md)，才能正常查询数据。
+    首次连接到 NebulaGraph 后，必须先[注册 Storage 服务](https://docs.nebula-graph.com.cn/{{nebula.release}}/2.quick-start/3.quick-start-on-premise/3.1add-storage-hosts/)，才能正常查询数据。
 
 NebulaGraph 支持多种类型的客户端，包括命令行客户端、可视化界面客户端和流行编程语言客户端。详情参见[客户端列表](https://docs.nebula-graph.com.cn/{{nebula.release}}/14.client/1.nebula-client/)。
 
 ## 前提条件
 
-- NebulaGraph 服务已[启动](https://docs.nebula-graph.com.cn/{{nebula.release}}/4.deployment-and-installation/manage-service/)。<!--必须用外链，因为这篇文档是复用的，用内部链接会出错。-->
+- NebulaGraph 服务已[启动](https://docs.nebula-graph.com.cn/{{nebula.release}}/4.deployment-and-installation/manage-service/)。
 
 - 运行 Nebula Console 的机器和运行 NebulaGraph 的服务器网络互通。
 

@@ -1,14 +1,11 @@
 # 什么是 NebulaGraph Explorer
 
-NebulaGraph Explorer （简称 Explorer）是一款可以通过 Web 访问的可视化图探索工具，搭配 NebulaGraph 内核使用，用于与图数据进行可视化交互。即使没有图数据操作经验，用户也可以快速成为图专家。
+NebulaGraph Explorer （简称 Explorer）是一款可以通过 Web 访问的可视化图探索工具，搭配 NebulaGraph 内核使用，用于与图数据进行可视化交互。即使没有图数据操作经验，用户也可以快速成为图专家。 
 
 !!! enterpriseonly
 
-    如需获取 Nebula Explorer 安装包，请[联系我们](https://www.nebula-graph.com.cn/contact)。
-
-!!! Note
-
-    用户可以[在线试用 Explorer](https://explorer.nebula-graph.com.cn/) 部分功能。
+    - 如需购买 Nebula Explorer，请[联系我们](https://www.nebula-graph.com.cn/contact)。
+    - 新用户可以[申请 30 天试用](https://wj.qq.com/s2/10158890/69a8)。你也可以[在线体验 Explorer](https://explorer.nebula-graph.com.cn/) 部分功能。
 
 ## 适用场景
 
@@ -50,7 +47,7 @@ NebulaGraph 的版本和 Explorer 版本对应关系如下。
 
 | NebulaGraph 版本 | Explorer 版本 |
 | --- | --- |
-| 3.3.0 | 3.2.0|
+| 3.3.0 | 3.2.1、3.2.0|
 | 3.1.0 ~ 3.2.x| 3.1.0|
 | 3.0.0 ~ 3.1.0 | 3.0.0  |
 | 2.5.x ~ 3.0.0| 2.2.0|
