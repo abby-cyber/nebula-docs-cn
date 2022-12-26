@@ -207,7 +207,7 @@ workingDir: ./data/
 logPath: ./err/test.log
 files:
   - path: ./student.csv
-    failDataPath: ./err/student.csv
+    failDataPath: ./err/student
     batchSize: 128
     limit: 10
     inOrder: false
@@ -216,11 +216,12 @@ files:
       withHeader: false
       withLabel: false
       delimiter: ","
+      lazyQuotes: false
 ```
 
 |参数|默认值|是否必须|说明|
 |:---|:---|:---|:---|
-|`workingDir`|-|否|在多个目录包含具有相同文件结构的数据，使用此参数在多个目录之间切换。例如，下面配置的 `path` 和 `failDataPath` 的值会自动更改为 `./data/student.csv` 和 `./data/err/student.csv`。参数可以是绝对的或相对的。|
+|`workingDir`|-|否|在多个目录包含具有相同文件结构的数据，使用此参数在多个目录之间切换。例如，下面配置的 `path` 和 `failDataPath` 的值会自动更改为 `./data/student` 和 `./data/err/student`。参数可以是绝对的或相对的。|
 |`logPath`|-|否|导入过程中的错误等日志信息输出的文件路径。|
 |`files.path`|-|是|数据文件的存放路径，如果使用相对路径，则会将路径和当前配置文件的目录拼接。可以使用星号（\*）进行模糊匹配，导入多个名称相似的文件，但是文件的结构需要相同。|
 |`files.failDataPath`|-|是|插入失败的数据文件存放路径，以便后面补写数据。|
@@ -231,6 +232,7 @@ files:
 |`files.csv.withHeader`|`false`|是|是否有表头。详情请参见[关于 CSV 文件表头](#csv_header)。|
 |`files.csv.withLabel`|`false`|是|是否有 LABEL。详情请参见[有表头配置说明](config-with-header.md)。|
 |`files.csv.delimiter`|`","`|是|指定 csv 文件的分隔符。只支持一个字符的字符串分隔符。|
+|`files.csv.lazyQuotes`|`false`|否|LazyQuotes设置为真时，一个引号可能会出现在非引号字段中，一个非双引号可能会出现在引号字段中。|
 
 #### Schema 配置
 

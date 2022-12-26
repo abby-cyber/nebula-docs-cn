@@ -129,7 +129,7 @@ files:
   - path: ./student_with_header.csv
 
     # 插入失败的数据文件存放路径，以便后面补写数据。
-    failDataPath: ./err/studenterr.csv
+    failDataPath: ./err/studenterr
 
     # 单批次插入数据的语句数量。
     batchSize: 10
@@ -159,7 +159,7 @@ files:
 
     # 本示例第二个数据文件为边的数据。
   - path: ./follow_with_header.csv
-    failDataPath: ./err/followerr.csv
+    failDataPath: ./err/followerr
     batchSize: 10
     limit: 10
     inOrder: true
