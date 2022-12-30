@@ -28,6 +28,9 @@ NebulaGraph 运行出现问题时，会返回错误码。本文介绍错误码�
 |`E_USER_NOT_FOUND`|`-18`| 用户不存在|
 |`E_STATS_NOT_FOUND`|`-19`| 统计信息不存在|
 |`E_SERVICE_NOT_FOUND`|`-20`| 没有找到当前服务|
+|`E_DRAINER_NOT_FOUND`|`-21`| drainer 不存在|
+|`E_DRAINER_CLIENT_NOT_FOUND`|`-22`| drainer 客户端不存在|
+|`E_PART_STOPPED`|`-23`| 当前 partition 已经被停止|
 |`E_BACKUP_FAILED`|`-24`| 备份失败|
 |`E_BACKUP_EMPTY_TABLE`|`-25`| 备份的表为空|
 |`E_BACKUP_TABLE_FAILED`|`-26`| 备份表失败|
@@ -96,6 +99,7 @@ NebulaGraph 运行出现问题时，会返回错误码。本文介绍错误码�
 |`E_LIST_CLUSTER_NO_AGENT_FAILURE`|`-2072`| 获取集群信息时无法获得 agent|
 |`E_QUERY_NOT_FOUND`|`-2073`| query 未找到|
 |`E_AGENT_HB_FAILUE`|`-2074`| agent 没有汇报心跳|
+|`E_GRAPH_MEMORY_EXCEEDED`|`-2600`| Graph 内存超出|
 |`E_CONSENSUS_ERROR`|`-3001`| 选举时无法达成共识|
 |`E_KEY_HAS_EXISTS`|`-3002`| key 已经存在|
 |`E_DATA_TYPE_MISMATCH`|`-3003`| 数据类型不匹配|
@@ -154,23 +158,7 @@ NebulaGraph 运行出现问题时，会返回错误码。本文介绍错误码�
 |`E_RAFT_ATOMIC_OP_FAILED`|`-3530`| 原子操作失败|
 |`E_LEADER_LEASE_FAILED`|`-3531`| leader 租约过期|
 |`E_RAFT_CAUGHT_UP`|`-3532`| Raft 已经同步数据|
-
-<!--
-|``|`-14`| zone 不存在|
-|``|`-2012`| zone 数量不足|
-|``|`-2013`| Zone 为空|
-|``|`-5004`| |
-|``|`-2043`| |
-|``|`-2006`| |
-|``|`-2029`| 缺少有效的 drainer|
-|``|`-3061`| 客户端和服务端版本不兼容|
-|``|`-3062`| 获取 ID 序号失败|
-
-//企业版
-|`E_DRAINER_NOT_FOUND`|`-21`| drainer 不存在|
-|`E_DRAINER_CLIENT_NOT_FOUND`|`-22`| drainer 客户端不存在|
-|`E_PART_STOPPED`|`-23`| 当前 partition 已经被停止|
-
+|`E_STORAGE_MEMORY_EXCEEDED`|`-3600`|Storage 内存超出|
 |`E_LOG_GAP`|`-4001`| drainer 日志落后|
 |`E_LOG_STALE`|`-4002`| drainer 日志过期|
 |`E_INVALID_DRAINER_STORE`|`-4003`| drainer 数据存储无效|
@@ -186,4 +174,15 @@ NebulaGraph 运行出现问题时，会返回错误码。本文介绍错误码�
 |`E_NODE_NUMBER_EXCEED_LIMIT`|`-7001`| 机器节点数超出限制|
 |`E_PARSING_LICENSE_FAILURE`|`-7002`| 解析证书失败|
 |`E_UNKNOWN`|`-8000`| 未知错误|
+
+<!--
+|``|`-14`| zone 不存在|
+|``|`-2012`| zone 数量不足|
+|``|`-2013`| Zone 为空|
+|``|`-5004`| |
+|``|`-2043`| |
+|``|`-2006`| |
+|``|`-2029`| 缺少有效的 drainer|
+|``|`-3061`| 客户端和服务端版本不兼容|
+|``|`-3062`| 获取 ID 序号失败|
 -->
