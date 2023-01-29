@@ -90,13 +90,13 @@
 
     ```ngql
     nebula> SHOW HOSTS;
-    +-------------+-----------+-----------+-----------+--------------+----------------------------------+------------------------+---------+
-    | Host        | Port      | HTTP port | Status    | Leader count | Leader distribution              | Partition distribution | Version |
-    +-------------+-----------+-----------+-----------+--------------+----------------------------------+------------------------+---------+
-    | "storaged0" | 9779      | 19669     | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | "3.1.0" |
-    | "storaged1" | 9779      | 19669     | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | "3.1.0" |
-    | "storaged2" | 9779      | 19669     | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | "3.1.0" |
-    +-------------+-----------+-----------+-----------+--------------+----------------------------------+------------------------+---------+
+    +-------------+-----------+-----------+--------------+----------------------------------+------------------------+---------+
+    | Host        | Port      | Status    | Leader count | Leader distribution              | Partition distribution | Version |
+    +-------------+-----------+-----------+--------------+----------------------------------+------------------------+---------+
+    | "storaged0" | 9779      | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | "{{nebula.release}" |
+    | "storaged1" | 9779      | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | "{{nebula.release}" |
+    | "storaged2" | 9779      | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | |{{nebula.release}" |
+    +-------------+-----------+-----------+--------------+----------------------------------+------------------------+---------+
     ```
 
     如果** Leader distribution **分布不均匀，请执行命令`BALANCE LEADER`重新分配。更多信息，请参见 [Storage 负载均衡](https://docs.nebula-graph.com.cn/{{nebula.release}}/8.service-tuning/load-balance/)。

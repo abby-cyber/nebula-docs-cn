@@ -12,6 +12,8 @@
 
 - NebulaGraph 数据库登录账号信息，包括用户名和密码。
 
+- 建议使用 Chrome 89 及以上的版本的 Chrome 浏览器，否则可能有兼容问题。
+
 ## OAuth2.0 认证设置
 
 !!! caution
@@ -47,7 +49,17 @@ OAuth 部分的配置说明如下。
 
 按以下步骤连接 NebulaGraph 数据库：
 
-1. 在 Explorer 的**配置数据库**页面上，输入以下信息：
+1. 在浏览器地址栏输入 `http://<ip_address>:7002`。
+
+  在浏览器窗口中看到以下登录界面表示已经成功部署并启动了 Explorer。
+
+  ![Nebula Explorer 登录页面](https://docs-cdn.nebula-graph.com.cn/figures/explorer_connect_230116_cn.png)
+
+  !!! note
+
+        首次登录 Nebula Explorer 的时候，页面显示*最终用户许可协议*的内容，请仔细阅读并单击**同意**。
+
+2. 在 Explorer 的**配置数据库**页面上，输入以下信息：
 
   - **Graphd IP 地址**：填写 NebulaGraph 的 Graph 服务本机 IP 地址。例如`192.168.10.100`。
 
@@ -63,7 +75,7 @@ OAuth 部分的配置说明如下。
     - 如果已启用身份验证，但是未创建账号信息，用户只能以 GOD 角色登录，必须填写用户名 `root` 和密码 `nebula`。
     - 如果已启用身份验证，同时又创建了不同的用户并分配了角色，不同角色的用户使用自己的账号和密码登录。
 
-2. 完成设置后，点击**登录**按钮。
+3. 完成设置后，点击**登录**按钮。
 
   !!! note
 
