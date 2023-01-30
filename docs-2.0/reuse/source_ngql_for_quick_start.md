@@ -93,9 +93,9 @@
     +-------------+-----------+-----------+--------------+----------------------------------+------------------------+---------+
     | Host        | Port      | Status    | Leader count | Leader distribution              | Partition distribution | Version |
     +-------------+-----------+-----------+--------------+----------------------------------+------------------------+---------+
-    | "storaged0" | 9779      | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | "{{nebula.release}" |
-    | "storaged1" | 9779      | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | "{{nebula.release}" |
-    | "storaged2" | 9779      | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | |{{nebula.release}" |
+    | "storaged0" | 9779      | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | "{{nebula.release}}" |
+    | "storaged1" | 9779      | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | "{{nebula.release}}" |
+    | "storaged2" | 9779      | "ONLINE"  | 5            | "basketballplayer:5"             | "basketballplayer:5"   | "{{nebula.release}}" |
     +-------------+-----------+-----------+--------------+----------------------------------+------------------------+---------+
     ```
 
