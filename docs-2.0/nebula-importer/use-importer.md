@@ -231,7 +231,7 @@ files:
 |`files.type`|-|是|文件类型。|
 |`files.csv.withHeader`|`false`|是|是否有表头。详情请参见[关于 CSV 文件表头](#csv_header)。|
 |`files.csv.withLabel`|`false`|是|是否有 LABEL。详情请参见[有表头配置说明](config-with-header.md)。|
-|`files.csv.delimiter`|`","`|是|指定 csv 文件的分隔符。只支持一个字符的字符串分隔符。|
+|`files.csv.delimiter`|`","`|是|指定 csv 文件的分隔符。只支持一个字符的字符串分隔符。使用特殊字符做分隔符时需要进行转义。例如当分隔符为十六进制`0x03`即`Ctrl+C`时，转义的写法为：`"\x03"`或`"\u0003"`。关于 yaml 格式特殊字符转义的细节请参见[更多](https://yaml.org/spec/1.2.2/#escaped-characters)。|
 |`files.csv.lazyQuotes`|`false`|否|LazyQuotes设置为真时，一个引号可能会出现在非引号字段中，一个非双引号可能会出现在引号字段中。|
 
 #### Schema 配置
@@ -248,6 +248,12 @@ schema:
   vertex:
     vid:
       index: 1
+      concatItems: # "c1{index0}c2{index1}2"
+        - "c1"
+        - 0
+        - c2
+        - 1
+        - "2"
       function: hash
       prefix: abc
     tags:
@@ -261,19 +267,27 @@ schema:
             index: 1
           - name: gender
             type: string
+            defaultValue: "male"
           - name: phone
             type: string
             nullable: true
-          - name: wechat
+          - name: email
             type: string
             nullable: true
             nullValue: "__NULL__"
+          - name: address
+            type: string
+            nullable: true
+            alternativeIndices:
+              - 7
+              - 8
 ```
 
 |参数|默认值|是否必须|说明|
 |:---|:---|:---|:---|
 |`files.schema.type`|-|是|Schema 的类型，可选值为`vertex`和`edge`。|
 |`files.schema.vertex.vid.index`|-|否|点 ID 对应 CSV 文件中列的序号。|
+|`files.schema.vertex.vid.concatItem`|-|否|用于连接两个或多个数组，连接项可以是`string`、`int`或者混合。`string`代表常量，`int`表示索引列。如果设置了`concatItem`，`index`参数将不生效。|
 |`files.schema.vertex.vid.function`|-|否|生成 VID 的函数。目前，我们只支持 `hash` 函数。|
 |`files.schema.vertex.vid.type`|-|否|点 ID 的数据类型，可选值为`int`和`string`。|
 |`files.schema.vertex.vid.prefix`|-|否|给 原始vid 添加的前缀，当同时指定了 `function` 时, 生成 VID 的方法是先添加 `prefix` 前缀, 再用 `function`生成 VID。|
@@ -283,6 +297,8 @@ schema:
 |`files.schema.vertex.tags.props.index`|-|否|属性对应 CSV 文件中列的序号。|
 |`files.schema.vertex.tags.props.nullable`|`false`|否|属性是否可以为`NULL`，可选`true`或者`false`。|
 |`files.schema.vertex.tags.props.nullValue`|`""`|否|`nullable`设置为`true`时，属性的值与`nullValue`相等则将该属性值设置为`NULL`。|
+|`files.schema.vertex.tags.props.alternativeIndices`|-|否|当`nullable`为`false`时忽略。该属性根据索引顺序从 csv 中获取，直到不等于`nullValue`。|
+|`files.schema.vertex.tags.props.defaultValue`|-|否当`nullable`为`false`时忽略。根据`index`和`alternativeIndices`获取的所有值为`nullValue`时设置默认值。|
 
 !!! note
     CSV 文件中列的序号从 0 开始，即第一列的序号为 0，第二列的序号为 1。
