@@ -6,4 +6,4 @@
 
 !!! enterpriseonly
 
-    如需获取{{explorer.name}}安装包，请[联系我们](https://www.nebula-graph.com.cn/contact)。
+    如需获取{{explorer.name}}安装包，请[联系我们](https://yueshu.com.cn/contact)。
