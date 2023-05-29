@@ -60,7 +60,7 @@ nebula> RETURN {zage: 32, name: "Marco Belinelli"};
 
 ```ngql
 // 返回点
-nebula> MATCH (v:player) \
+nebula> MATCH (v:player) \ 
         RETURN v;
 +---------------------------------------------------------------+
 | v                                                             |
@@ -129,21 +129,26 @@ nebula> MATCH (v:player{name:"Tim Duncan"}) \
 
 ## 返回属性
 
-使用语法`<vertex_name>.<tag_name>.<property_name>`返回点的属性；使用语法`<edge_name>.<property_name>`返回边的属性。
+返回点的属性时，必需指定属性所属的 Tag，因为点可以有多个 Tag，并且同一个属性名可以在不同的 Tag 上出现。
+
+支持指定点的 Tag 返回该 Tag 的所有属性；也支持指定点的 Tag 和某个属性名，返回该 Tag 的指定属性。
+
 
 ```ngql
 // 返回点的属性
 nebula> MATCH (v:player) \
-        RETURN v.player.name, v.player.age \
+        RETURN v.player, v.player.name, v.player.age \
         LIMIT 3;
-+------------------+--------------+
-| v.player.name    | v.player.age |
-+------------------+--------------+
-| "Danny Green"    | 31           |
-| "Tiago Splitter" | 34           |
-| "David West"     | 38           |
-+------------------+--------------+
++--------------------------------------+---------------------+--------------+
+| v.player                             | v.player.name       | v.player.age |
++--------------------------------------+---------------------+--------------+
+| {age: 33, name: "LaMarcus Aldridge"} | "LaMarcus Aldridge" | 33           |
+| {age: 25, name: "Kyle Anderson"}     | "Kyle Anderson"     | 25           |
+| {age: 40, name: "Kobe Bryant"}       | "Kobe Bryant"       | 40           |
++--------------------------------------+---------------------+--------------+
 ```
+
+返回边的属性时，无需指定属性所属的 Edge type，因为边只能有一个 Edge type。
 
 ```ngql
 // 返回边的属性
@@ -157,7 +162,6 @@ nebula> MATCH (v:player{name:"Tim Duncan"})-[e]->() \
 | 1997         | __NULL__ |
 +--------------+----------+
 ```
-
 
 使用`properties()`函数返回点或边的所有属性。
 
