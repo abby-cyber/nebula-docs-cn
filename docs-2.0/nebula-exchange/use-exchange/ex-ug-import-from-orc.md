@@ -20,7 +20,7 @@
 
 - Hadoop：2.9.2 伪分布式部署
 
-- {{nebula.name}}：{{nebula.release}}。使用 [Docker Compose 部署](../../4.deployment-and-installation/2.compile-and-install-nebula-graph/3.deploy-nebula-graph-with-docker-compose.md)。
+- {{nebula.name}}：{{nebula.release}}。
 
 ## 前提条件
 
@@ -183,6 +183,11 @@
       # 目前，{{nebula.name}} {{nebula.release}}仅支持字符串或整数类型的 VID。
       vertex: {
         field:id
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
 
       # 指定单批次写入{{nebula.name}}的最大点数量。
@@ -265,9 +270,19 @@
       # 目前，{{nebula.name}} {{nebula.release}}仅支持字符串或整数类型的 VID。
       source: {
         field: src
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
       target: {
         field: dst
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
 
       # 指定一个列作为 rank 的源（可选）。

@@ -3,9 +3,9 @@
 {{nebula.name}}运行出现问题时，会返回错误码。本文介绍错误码的详细信息。
 
 !!! note
-    {comm.comm_begin}
+    {{comm.comm_begin}}
     - 如果出现错误但没有返回错误码，或错误码描述不清，请在[论坛](https://discuss.nebula-graph.com.cn/)或 [GitHub](https://github.com/vesoft-inc/nebula/issues) 反馈。
-    {comm.comm_end}
+    {{comm.comm_end}}
     - 返回`0`表示执行成功。
 
 |错误名称|错误码|说明|
@@ -99,7 +99,9 @@
 |`E_LIST_CLUSTER_GET_ABS_PATH_FAILURE`|`-2071`| 获取集群信息时无法获取绝对路径|
 |`E_LIST_CLUSTER_NO_AGENT_FAILURE`|`-2072`| 获取集群信息时无法获得 agent|
 |`E_QUERY_NOT_FOUND`|`-2073`| query 未找到|
-|`E_AGENT_HB_FAILUE`|`-2074`| agent 没有汇报心跳|
+|`E_AGENT_HB_FAILURE`|`-2074`| agent 没有汇报心跳|
+|`E_HOST_CAN_NOT_BE_ADDED`|`-2082`| 该主机不能被添加，因为它不是一个 Storage 主机|
+|`E_ACCESS_ES_FAILURE`|`-2090`| 访问 Elasticsearch 失败|
 |`E_GRAPH_MEMORY_EXCEEDED`|`-2600`| Graph 内存超出|
 |`E_CONSENSUS_ERROR`|`-3001`| 选举时无法达成共识|
 |`E_KEY_HAS_EXISTS`|`-3002`| key 已经存在|

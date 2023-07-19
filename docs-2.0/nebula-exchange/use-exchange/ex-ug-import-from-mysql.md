@@ -60,7 +60,7 @@ mysql> desc serve;
 
 - MySQL： 8.0.23
 
-- {{nebula.name}}：{{nebula.release}}。使用 [Docker Compose 部署](../../4.deployment-and-installation/2.compile-and-install-nebula-graph/3.deploy-nebula-graph-with-docker-compose.md)。
+- {{nebula.name}}：{{nebula.release}}。
 
 ## 前提条件
 
@@ -75,6 +75,8 @@ mysql> desc serve;
 - 已经编译 Exchange。详情请参见[编译 Exchange](../ex-ug-compile.md)。本示例中使用 Exchange {{exchange.release}}。
 
 - 已经安装 Spark。
+
+- [mysql-connector-java-xxx.jar](https://mvnrepository.com/artifact/mysql/mysql-connector-java) 已经下载并放置在 Spark 的`SPARK_HOME/jars`目录下。
 
 - 了解{{nebula.name}}中创建 Schema 的信息，包括 Tag 和 Edge type 的名称、属性等。
 
@@ -204,6 +206,11 @@ mysql> desc serve;
       # 指定表中某一列数据为 {{nebula.name}} 中点 VID 的来源。
       vertex: {
         field:playerid
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
 
       # 单批次写入 {{nebula.name}} 的数据条数。
@@ -273,10 +280,20 @@ mysql> desc serve;
       # 在 target 里，将 follow 表中某一列作为边的目的点数据源。
       source: {
         field: src_player
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
 
       target: {
         field: dst_player
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
 
       # 指定一个列作为 rank 的源（可选）。

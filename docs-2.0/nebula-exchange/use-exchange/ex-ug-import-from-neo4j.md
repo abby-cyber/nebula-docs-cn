@@ -41,7 +41,7 @@ Exchange 读取 Neo4j 数据时需要完成以下工作：
 
 - Neo4j：3.5.20 Community Edition
 
-- {{nebula.name}}：{{nebula.release}}。使用 [Docker Compose 部署](../../4.deployment-and-installation/2.compile-and-install-nebula-graph/3.deploy-nebula-graph-with-docker-compose.md)。
+- {{nebula.name}}：{{nebula.release}}。
 
 ## 前提条件
 
@@ -182,6 +182,11 @@ Exchange 读取 Neo4j 数据时需要完成以下工作：
       nebula.fields: [age,name]
       vertex: {
         field:id
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
       partition: 10
       batch: 1000
@@ -229,9 +234,19 @@ Exchange 读取 Neo4j 数据时需要完成以下工作：
       nebula.fields: [degree]
       source: {
         field: src
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
       target: {
         field: dst
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
       #ranking: rank
       partition: 10

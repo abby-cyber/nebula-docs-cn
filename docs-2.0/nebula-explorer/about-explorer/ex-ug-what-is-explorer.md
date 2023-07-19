@@ -1,11 +1,6 @@
 # 什么是{{explorer.name}}
 
-{{explorer.name}}是一款可以通过 Web 访问的可视化图探索工具，搭配{{nebula.name}}内核使用，用于与图数据进行可视化交互。即使没有图数据操作经验，用户也可以快速成为图专家。 
-
-!!! enterpriseonly
-
-    - 如需购买{{explorer.name}}，请[联系我们](https://yueshu.com.cn/contact)。
-    - 新用户可以[申请 30 天试用](https://wj.qq.com/s2/10158890/69a8)。你也可以[在线体验{{explorer.name}}](https://explorer.nebula-graph.com.cn/) 部分功能。
+{{explorer.name}}是一款可以通过 Web 访问的可视化图探索工具，搭配{{nebula.name}}内核使用，用于与图数据进行可视化交互。即使没有图数据操作经验，用户也可以快速成为图专家。
 
 ## 适用场景
 
@@ -47,7 +42,8 @@
 
 |{{nebula.name}}版本 | {{explorer.name}}版本 |
 | --- | --- |
-| 3.4.0 ~ 3.4.1 | 3.4.0、3.2.1、3.2.0   |
+| 3.5.0         | 3.5.0、3.4.0   |
+| 3.4.0 ~ 3.4.1 | 3.5.0、3.4.0、3.2.1、3.2.0   |
 | 3.3.0 | 3.2.1、3.2.0|
 | 3.1.0 ~ 3.2.x| 3.1.0|
 | 3.0.0 ~ 3.1.0 | 3.0.0  |
@@ -55,8 +51,10 @@
 | 2.6.x | 2.1.0 |
 | 2.5.x | 2.0.0 |
 
-
+<!--
 ## 视频
 
 * [NebulaGraph Explore Demo Show](https://www.bilibili.com/video/BV1VL4y1V7C2/)（2 分 54 秒）
 <iframe src="//player.bilibili.com/player.html?aid=853353222&bvid=BV1VL4y1V7C2&cid=581214591&page=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="720px" height="480px"> </iframe>
+
+-->

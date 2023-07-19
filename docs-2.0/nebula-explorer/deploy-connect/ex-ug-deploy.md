@@ -8,7 +8,7 @@
 
 - 已[在 LM 中加载 License Key](../../9.about-license/2.license-management-suite/3.license-manager.md)。
 
-- {{nebula.name}} 服务已经部署并启动。详细信息参考 [{{nebula.name}}安装部署](../../4.deployment-and-installation/1.resource-preparations.md "点击前往{{nebula.name}}安装部署")。
+- {{nebula.name}}服务已经部署并启动。详细信息参考 [{{nebula.name}}安装部署](../../4.deployment-and-installation/1.resource-preparations.md "点击前往{{nebula.name}}安装部署")。
 
 - 以下端口未被使用。
 
@@ -22,15 +22,15 @@
 
 - 使用的 Linux 发行版为 CentOS。
 
-- 如果需要使用图计算，需要部署 HDFS。namenode 默认使用 8020 端口，datanode 默认使用 50010 端口。
-
-  !!! caution
-
-       如果 HDFS 端口不通，可能会提示连接超时。
-
 ## 注意事项
 
 {{explorer.name}}从 3.2.0 版本开始内置了 Dag Controller 安装包，用于提供图计算服务。用户可以自行决定是否启动 Dag Controller 服务。如果没有启动 Dag Controller 服务，{{explorer.name}}中的 **Workflow** 菜单将显示为灰色无法点击。
+
+此外，如果需要使用 **Workflow** 进行复杂图计算，还需在安装{{explorer.name}}后配置 NFS 或 HDFS，namenode 默认使用 8020 端口，datanode 默认使用 50010 端口。详情参见 **Workflow** 的[资源配置](../../nebula-explorer/workflow/1.prepare-resources.md)。
+
+<!--  !!! caution
+
+       如果 HDFS 端口不通，可能会提示连接超时。-->
 
 ## RPM 部署
 
@@ -38,31 +38,27 @@
 
 1. 根据需要下载 RPM 包，建议选择最新版本。
 
-  !!! enterpriseonly
-
-        用户可以[在线申请](https://wj.qq.com/s2/10158890/69a8)试用{{explorer.name}}；如需购买，请[联系我们](https://yueshu.com.cn/contact)。
-
 2. 使用`sudo rpm -i <rpm>`命令安装 RPM 包。
 
-   例如，安装{{explorer.name}}需要运行以下命令，默认安装路径为`/usr/local/nebula-explorer`：
+   例如，安装{{explorer.name}}需要运行以下命令，默认安装路径为`/usr/local/yueshu-explorer`：
 
    ```bash
-   sudo rpm -i nebula-explorer-<version>.x86_64.rpm
+   sudo rpm -i yueshu-explorer-<version>.x86_64.rpm
    ```
 
    也可以使用`--prefix`选项安装到指定路径：
    ```bash
-   sudo rpm -i nebula-explorer-<version>.x86_64.rpm --prefix=<path> 
+   sudo rpm -i yueshu-explorer-<version>.x86_64.rpm --prefix=<path> 
    ```
 
-2. 进入解压后的文件夹，在`config`目录内修改`app-config.yaml`文件，设置`LicenseManagerURL`的值为 LM 所在的主机 IP 和端口号`9119`，例如`192.168.8.100:9119`。
+3. 进入解压后的文件夹，在`config`目录内修改`app-config.yaml`文件，设置`LicenseManagerURL`的值为 LM 所在的主机 IP 和端口号`9119`，例如`192.168.8.100:9119`。
 
-3. （可选）配置 Dag Controller。参见下文 **配置 Dag Controller** 部分。
+4. （可选）配置 Dag Controller。参见下文 **配置 Dag Controller** 部分。
 
-4. 进入`nebula-explorer`文件夹，执行以下命令启动服务。
+5. 进入`yueshu-explorer`文件夹，执行以下命令启动服务。
 
    ```bash
-   cd nebula-explorer
+   cd yueshu-explorer
 
    # 启动{{explorer.name}}。
    sudo ./scripts/start.sh
@@ -76,9 +72,9 @@
 支持使用 systemctl 服务控制项目启停。
 
 ```bash
-systemctl status nebula-explorer #查看服务状态
-systemctl stop nebula-explorer #停止服务
-systemctl start nebula-explorer #启动服务
+systemctl status yueshu-explorer #查看服务状态
+systemctl stop yueshu-explorer #停止服务
+systemctl start yueshu-explorer #启动服务
 ```
 
 也可以在安装目录下使用以下命令，手动启动或停止服务。
@@ -95,7 +91,7 @@ sudo ./dag-ctrl/scripts/stop.sh #停止 Dag Controller 服务
 使用以下的命令卸载{{explorer.name}}。
 
 ```bash
-sudo rpm -e nebula-explorer-<version>.x86_64
+sudo rpm -e yueshu-explorer-<version>.x86_64
 ```
 
 ## DEB 部署
@@ -104,17 +100,12 @@ sudo rpm -e nebula-explorer-<version>.x86_64
 
 1. 下载 DEB 包。
 
-  !!! enterpriseonly
-
-        用户可以[在线申请](https://wj.qq.com/s2/10158890/69a8)试用{{explorer.name}}；如需购买，请[联系我们](https://yueshu.com.cn/contact)。
-
-
 2. 使用`sudo dpkg -i <package_name>`命令安装 DEB 包。
 
-  例如，安装{{explorer.name}}需要运行以下命令，默认安装路径为`/usr/local/nebula-explorer`：
+  例如，安装{{explorer.name}}需要运行以下命令，默认安装路径为`/usr/local/yueshu-explorer`：
 
   ```bash
-  sudo dpkg -i nebula-explorer-{{explorer.release}}.x86_64.deb
+  sudo dpkg -i yueshu-explorer-{{explorer.release}}.x86_64.deb
   ```
   
   !!! note
@@ -125,10 +116,10 @@ sudo rpm -e nebula-explorer-<version>.x86_64
 
 4. （可选）配置 Dag Controller。参见下文 **配置 Dag Controller** 部分。
 
-5. 进入`nebula-explorer`文件夹，执行以下命令启动服务。
+5. 进入`yueshu-explorer`文件夹，执行以下命令启动服务。
 
    ```bash
-   cd nebula-explorer
+   cd yueshu-explorer
 
    # 启动{{explorer.name}}。
    sudo ./lib/start.sh
@@ -140,13 +131,13 @@ sudo rpm -e nebula-explorer-<version>.x86_64
 ### 查看服务状态
 
 ```bash
-sudo systemctl status nebula-explorer.service
+sudo systemctl status yueshu-explorer.service
 ```
 
 ### 停止服务
 
 ```bash
-sudo systemctl stop nebula-explorer.service
+sudo systemctl stop yueshu-explorer.service
 ```
 
 ### 卸载
@@ -154,7 +145,7 @@ sudo systemctl stop nebula-explorer.service
 使用以下的命令卸载{{explorer.name}}。
 
 ```bash
-sudo dpkg -r nebula-explorer
+sudo dpkg -r yueshu-explorer
 ```
 
 ## TAR 包部署
@@ -163,30 +154,26 @@ sudo dpkg -r nebula-explorer
 
 1. 根据需要下载 TAR 包，建议选择最新版本。
 
-  !!! enterpriseonly
-
-        {{explorer.name}}仅在企业版提供，点击[定价](https://nebula-graph.com.cn/pricing/)查看更多。
-
 2. 使用 `tar -xvf` 解压 tar 包。
 
    ```bash
-   tar -xvf nebula-explorer-<version>.tar.gz
+   tar -xvf yueshu-explorer-<version>.tar.gz
    ```
 
 3. 进入解压后的文件夹，在`config`目录内修改`app-config.yaml`文件，设置`LicenseManagerURL`的值为 LM 所在的主机 IP 和端口号`9119`，例如`192.168.8.100:9119`。
 
 4. （可选）配置 Dag Controller。参见下文 **配置 Dag Controller** 部分。
 
-5. 进入`nebula-explorer`文件夹，执行以下命令启动服务。
+5. 进入`yueshu-explorer`文件夹，执行以下命令启动服务。
 
   ```bash
-  cd nebula-explorer
+  cd yueshu-explorer
 
   # 启动{{explorer.name}}和 Dag Controller。
   sudo ./scripts/start.sh
 
   # 单独启动{{explorer.name}}。
-  sudo nohup ./nebula-explorer-server > explorer.log 2>&1 &
+  sudo nohup ./yueshu-explorer-server > explorer.log 2>&1 &
   ```
 
 ### 停止服务
@@ -281,7 +268,7 @@ Dag Controller 可以结合{{plato.name}}进行复杂的图计算。例如 Dag C
       - 其它参数是算法的执行参数，后续在[可视化工作流页面](../workflow/2.create-workflow.md)配置。
 
   ```bash
-  exec_file: /home/xxx/nebula-analytics/scripts/run_algo.sh
+  exec_file: /home/xxx/yueshu-analytics/scripts/run_algo.sh
   ```
 
 ## 后续操作

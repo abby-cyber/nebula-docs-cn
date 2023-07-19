@@ -12,7 +12,7 @@
 
 - Spark：2.4.7，单机版
 
-- {{nebula.name}}：{{nebula.release}}。使用 [Docker Compose 部署](../../4.deployment-and-installation/2.compile-and-install-nebula-graph/3.deploy-nebula-graph-with-docker-compose.md)。
+- {{nebula.name}}：{{nebula.release}}。
 
 ## 前提条件
 
@@ -31,6 +31,10 @@
 - 了解{{nebula.name}}中创建 Schema 的信息，包括 Tag 和 Edge type 的名称、属性等。
 
 - 已经安装并开启 Pulsar 服务。
+
+## 注意事项
+
+导入 Pulsar 数据时只支持 Client 模式，即参数`tags.type.sink`和`edges.type.sink`的值为`client`。
 
 ## 操作步骤
 
@@ -135,7 +139,7 @@
       type: {
         # 指定数据源文件格式，设置为 Pulsar。
         source: pulsar
-        # 指定如何将点数据导入{{nebula.name}}：Client 或 SST。
+        # 指定如何将数据导入{{nebula.name}}。只支持 Client。
         sink: client
       }
       # Pulsar 服务器地址。
@@ -156,6 +160,11 @@
       # 指定表中某一列数据为{{nebula.name}}中点 VID 的来源。
       vertex:{
           field:playerid
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
 
       # 单批次写入{{nebula.name}}的数据条数。
@@ -202,7 +211,7 @@
         source: pulsar
 
         # 指定边数据导入{{nebula.name}}的方式，
-        # 指定如何将点数据导入{{nebula.name}}：Client 或 SST。
+        # 指定如何将数据导入{{nebula.name}}。只支持 Client。
         sink: client
       }
 
@@ -225,10 +234,20 @@
       # 在 target 里，将 follow 表中某一列作为边的目的点数据源。
       source:{
           field:src_player
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
 
       target:{
           field:dst_player
+      # udf:{
+      #            separator:"_"
+      #            oldColNames:[field-0,field-1,field-2]
+      #            newColName:new-field
+      #        }
       }
 
       # 指定一个列作为 rank 的源（可选）。

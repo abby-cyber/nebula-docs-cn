@@ -15,7 +15,7 @@ repo_name: 'vesoft-inc/nebula'
 repo_url: 'https://github.com/vesoft-inc/nebula' 
 docs_dir: docs-2.0 
 # modify when release: 
-edit_uri: 'https://github.com/vesoft-inc/nebula-docs-cn/edit/master/docs-2.0/'  
+edit_uri: 'https://github.com/vesoft-inc/nebula-docs-cn/edit/v3.5.0/docs-2.0/'
 copyright: Copyright &copy; 2023 NebulaGraph - 浙ICP备20010487号
 # nav.comm.end
 
@@ -79,7 +79,7 @@ markdown_extensions:
 
 # Plugins
 plugins:
-  - search # 这个是原有的 mkdocs 搜索插件， 如果想使用algolia搜索，请注释掉这个插件
+#  - search # 这个是原有的 mkdocs 搜索插件， 如果想使用algolia搜索，请注释掉这个插件
   - macros:
       include_dir: docs-2.0/reuse/
   - git-revision-date-localized
@@ -91,12 +91,20 @@ plugins:
         - nebula-flink/*
         - CHANGELOG.md
         # - nebula-cloud/*
+        - nebula-importer/config-with-header.md
+        - nebula-importer/config-without-header.md
         - nebula-cloud.md
         - nebula-cloud/nebula-cloud-on-azure/*
         - spark-connector/*
         - 4.deployment-and-installation/5.zone.md
         - 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-from-200-to-latest.md
+        - 9.about-license/3.purchase-license.md
+        - 9.about-license/4.generate-and-load-license-key.md
+        - 9.about-license/5.manage-license.md
+        - 9.about-license/2.license-management-suite/1.suite-overview.md
+        - 9.about-license/2.license-management-suite/2.license-center.md
         # exclude.ent.begin
+        - 9.about-license/*
         - 3.ngql-guide/6.functions-and-expressions/17.ES-function.md
         - 4.deployment-and-installation/deploy-license.md
         - 5.configurations-and-logs/2.log-management/audit-log.md
@@ -118,9 +126,28 @@ plugins:
         - 20.appendix/release-notes/dashboard-ent-release-note.md
         - 20.appendix/release-notes/explorer-release-note.md
         - 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-ent-from-3.x-3.4.md
+        - 2.quick-start/2.quick-start-on-cloud/1.create-instance-on-cloud.md
+        - 2.quick-start/2.quick-start-on-cloud/2.connect-to-nebulagraph-on-cloud.md
+        - 2.quick-start/2.quick-start-on-cloud/3.how-to-query-on-cloud.md
+        - 9.about-license/1.license-overview.md
+        - 9.about-license/2.license-management-suite/1.suite-overview.md
+        - nebula-cloud/1.what-is-cloud.md
+        - nebula-cloud/nebula-cloud-on-alibabacloud/1.create-service-instance.md
+        - nebula-cloud/nebula-cloud-on-alibabacloud/2.use-cloud-services.md
+        - nebula-cloud/nebula-cloud-on-alibabacloud/3.delete-service-instance.md
+        - nebula-cloud/nebula-cloud-on-alibabacloud/4.scaling-services.md
         - 4.deployment-and-installation/3.upgrade-nebula-graph/_upgrade-nebula-from-300-to-latest.md
+        - 3.ngql-guide/6.functions-and-expressions/9.user-defined-functions.md
         # exclude.ent.end
         # exclude.comm.begin
+        - nebula-dashboard/1.what-is-dashboard.md
+        - nebula-dashboard/2.deploy-dashboard.md
+        - nebula-dashboard/3.connect-dashboard.md
+        - nebula-dashboard/4.use-dashboard.md
+        - nebula-dashboard/6.monitor-parameter.md
+        - 15.contribution/how-to-contribute.md
+        - 2.quick-start/1.quick-start-overview.md
+        - 2.quick-start/2.start-free-trial-on-cloud.md
         - backup-and-restore/nebula-br/*
         - 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest.md
         - nebula-studio/*
@@ -135,6 +162,8 @@ plugins:
         - 8.service-tuning/enable_autofdo_for_nebulagraph.md
         - 20.appendix/history.md
         - 20.appendix/mind-map.md
+        - 4.deployment-and-installation/2.compile-and-install-nebula-graph/3.deploy-nebula-graph-with-docker-compose.md
+        - 3.ngql-guide/6.functions-and-expressions/9.user-defined-functions.md
         # exclude.comm.end
 
 # Exclude the file with the following file name.
@@ -142,11 +171,10 @@ plugins:
 # Exclude files with regular expressions (regexes)
 #    regex:
 #      - '.*\.(tmp|bin|tar)$'
-# nav.pdf.begin
   - with-pdf:
       copyright: 2023 vesoft Inc.
-      cover_subtitle: master
-      author: 吴敏，梁振亚，黄凤仙，李泓臻
+      cover_subtitle: v3.5.0
+      author: 梁振亚，黄凤仙
       cover: true
       back_cover: true
 # nav.comm.begin
@@ -155,8 +183,14 @@ plugins:
 # nav.ent.begin
       cover_logo: 'https://docs-cdn.nebula-graph.com.cn/figures/yueshu_favicon_230515.png'
 # nav.ent.end
+
+  # nav.ent.begin
+      output_path: pdf/yueshu-cn.pdf
+  # nav.ent.end
+  # nav.comm.begin
       output_path: pdf/NebulaGraph-CN.pdf
-# nav.pdf.end
+  # nav.comm.end
+
 extra_javascript:
   - js/version-select.js      
   - js/config.js
@@ -169,13 +203,13 @@ extra_javascript:
 
 # modify when release: 
 extra:
-  # Modify doc_version to automatically update the parameters for releasing a new version
-  doc_version: master
   # Language selector.
+  # nav.comm.begin
   alternate:
     - name: English
       link: https://docs.nebula-graph.io/
       lang: en
+  # nav.comm.end
   # Google Analytics.
   analytics:
     provider: google
@@ -189,13 +223,13 @@ extra:
       link: 'https://github.com/vesoft-inc/nebula-docs-cn'
 # nav.comm.end
   nebula:
-    release: 3.4.1
+    release: 3.5.0
     nightly: nightly
     master: master
     base20: 2.0
     base200: 2.0.0
-    branch: release-3.4
-    tag: v3.4.1
+    branch: release-3.5
+    tag: v3.5.0
     # nav.ent.begin
     name: 悦数图数据库
     # nav.ent.end
@@ -206,12 +240,12 @@ extra:
     base111b: 1.1.1-beta
     base220: 2.2.1
     base300: 3.0.0
-    release: 3.6.0
-    tag: v3.6.0
+    release: 3.7.0
+    tag: v3.7.0
   explorer:
-    release: 3.4.0
-    branch: release-3.4
-    tag: v3.4.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
     # nav.ent.begin
     name: 悦数图探索
     # nav.ent.end
@@ -219,25 +253,25 @@ extra:
     name: NebulaGraph Explorer
     # nav.comm.end
   exchange_ent:
-    release: 3.4.0
-    branch: release-3.4
-    tag: v3.4.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
   exchange:
-    release: 3.4.0
-    branch: release-3.4
-    tag: v3.4.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
   importer:
-    release: 3.4.0
-    branch: release-3.4
-    tag: v3.4.0
+    release: 4.0.0
+    branch: release-4.0
+    tag: v4.0.0
   algorithm:
     release: 3.0.0
     branch: v3.0.0
     tag: v3.0.0
   plato:
-    release: 3.4.0
-    branch: release-3.4
-    tag: v3.4.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
     # nav.ent.begin
     name: 悦数图计算
     # nav.ent.end
@@ -249,22 +283,22 @@ extra:
     branch: release-3.4
     tag: v3.4.0
   flinkconnector:
-    release: 3.3.0
-    branch: release-3.3
-    tag: v3.3.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
   dockercompose:
-    release: 3.4.0
-    branch: release-3.4
-    tag: v3.4.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
   dashboard:
     release: 3.4.0
     tag: v3.4.0
     base100: 1.0.0
     branch: release-3.4
   dashboard_ent:
-    release: 3.4.2
-    tag: v3.4.2
-    branch: release-3.4
+    release: 3.5.0
+    tag: v3.5.0
+    branch: release-3.5
     # nav.ent.begin
     name: 悦数运维监控
     # nav.ent.end
@@ -272,16 +306,16 @@ extra:
     name: NebulaGraph Dashboard
     # nav.comm.end
   console:
-    release: 3.4.0
-    branch: release-3.4
-    tag: v3.4.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
   br:
-    release: 3.3.0
-    branch: release-3.3
-    tag: v3.3.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
   br_ent:
-    release: 3.4.1
-    tag: v3.4.1
+    release: 3.5.0
+    tag: v3.5.0
     # nav.ent.begin
     name: Backup&Restore
     # nav.ent.end
@@ -296,17 +330,17 @@ extra:
     branch: release-3.4
     tag: v3.4.0
   java:
-    release: 3.4.0
-    branch: release-3.4
-    tag: v3.4.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
   python:
     release: 3.4.0
     branch: release-3.4
     tag: v3.4.0
   go:
-    release: 3.4.0
-    branch: release-3.4
-    tag: v3.4.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
   bench:
     release: 1.2.0
     branch: release-1.2
@@ -316,7 +350,7 @@ extra:
     tag: v1.4.2
     branch: release-1.4
     upgrade_from: 3.0.0
-    upgrade_to: 3.4.0
+    upgrade_to: 3.4.1
   exporter:
     release: 3.3.0
     branch: release-3.3
@@ -326,9 +360,9 @@ extra:
     branch: release-3.4
     tag: v3.4.0
   bbox:
-    release: 3.4.0
-    branch: release-3.4
-    tag: v3.4.0
+    release: 3.5.0
+    branch: release-3.5
+    tag: v3.5.0
     # nav.ent.begin
     name: 悦数黑匣子
     # nav.ent.end
@@ -343,6 +377,9 @@ extra:
     # nav.ent.begin
     name: 悦数图数据库
     # nav.ent.end
+    # nav.comm.begin
+    name: 悦数图数据库
+    # nav.comm.end
 
 # nav.ent.begin
 nav:
@@ -416,6 +453,7 @@ nav:
           - 集合运算符: 3.ngql-guide/5.operators/6.set.md
           - 字符串运算符: 3.ngql-guide/5.operators/7.string.md
           - 列表运算符: 3.ngql-guide/5.operators/8.list.md
+          - 算术运算符: 3.ngql-guide/5.operators/10.arithmetic.md
           - 运算符优先级: 3.ngql-guide/5.operators/9.precedence.md
 
       - 函数和表达式:
@@ -429,7 +467,7 @@ nav:
           - 条件表达式函数: 3.ngql-guide/6.functions-and-expressions/5.conditional-expressions.md
           - 谓词函数: 3.ngql-guide/6.functions-and-expressions/8.predicate.md
           - geo 函数: 3.ngql-guide/6.functions-and-expressions/14.geo.md
-          - 自定义函数: 3.ngql-guide/6.functions-and-expressions/9.user-defined-functions.md
+#          - 自定义函数: 3.ngql-guide/6.functions-and-expressions/9.user-defined-functions.md
 
       - 通用查询语句:
           - MATCH: 3.ngql-guide/7.general-query-statements/2.match.md
@@ -535,7 +573,6 @@ nav:
       - 安装软件包:
           - 使用 RPM/DEB 包安装: 4.deployment-and-installation/2.compile-and-install-nebula-graph/2.install-nebula-graph-by-rpm-or-deb.md
           - 使用 TAR 包安装: 4.deployment-and-installation/2.compile-and-install-nebula-graph/4.install-nebula-graph-from-tar.md
-          - 使用 Docker Compose 部署: 4.deployment-and-installation/2.compile-and-install-nebula-graph/3.deploy-nebula-graph-with-docker-compose.md
           - 使用 RPM/DEB 包部署多机集群: 4.deployment-and-installation/2.compile-and-install-nebula-graph/deploy-nebula-graph-cluster.md
           - 使用生态工具安装: 4.deployment-and-installation/2.compile-and-install-nebula-graph/6.deploy-nebula-graph-with-peripherals.md
       - 管理服务: 4.deployment-and-installation/manage-service.md
@@ -544,7 +581,7 @@ nav:
 #      - 管理逻辑机架（Zone）: 4.deployment-and-installation/5.zone.md
       - 升级版本:
         #  - 升级 v3.x 至 v3.4（社区版）: 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-from-300-to-latest.md
-          - 升级悦数图数据库至 v3.4（企业版）: 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-ent-from-3.x-3.4.md
+          - 升级悦数图数据库至 v3.5（企业版）: 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-ent-from-3.x-3.4.md
       - 卸载悦数图数据库: 4.deployment-and-installation/4.uninstall-nebula-graph.md
 
   - 配置与日志:
@@ -587,10 +624,9 @@ nav:
 
   - 导入与导出:
       - 概述: 20.appendix/write-tools.md
-      - NebulaGraph Importer:
-        - 使用 NebulaGraph Importer: nebula-importer/use-importer.md
-        - 有表头配置说明: nebula-importer/config-with-header.md
-        - 无表头配置说明: nebula-importer/config-without-header.md
+      - 使用 NebulaGraph Importer: nebula-importer/use-importer.md
+#        - 有表头配置说明: nebula-importer/config-with-header.md
+#        - 无表头配置说明: nebula-importer/config-without-header.md
 
       - NebulaGraph Exchange:
         - 认识 NebulaGraph Exchange:
@@ -671,15 +707,6 @@ nav:
       - 集群管理:
         - 集群总览: nebula-dashboard-ent/4.cluster-operator/1.overview.md
         - 集群监控: nebula-dashboard-ent/4.cluster-operator/2.monitor.md
-        - 通知: nebula-dashboard-ent/4.cluster-operator/9.notification.md
-        - 分析诊断:
-          - 慢查询分析: nebula-dashboard-ent/4.cluster-operator/analysis-diagnosis/slow-query-analyst.md
-          - 集群诊断: nebula-dashboard-ent/4.cluster-operator/analysis-diagnosis/cluster-diagnosis.md 
-        - 集群信息: 
-          - 信息总览: nebula-dashboard-ent/4.cluster-operator/cluster-information/overview-info.md
-          - 作业管理: nebula-dashboard-ent/4.cluster-operator/cluster-information/job-management.md
-          - 审计日志: nebula-dashboard-ent/4.cluster-operator/cluster-information/audit-log.md
-          - 运行日志: nebula-dashboard-ent/4.cluster-operator/cluster-information/runtime-log.md
         - 集群操作: 
           - 节点管理: nebula-dashboard-ent/4.cluster-operator/operator/node.md
           - 扩缩容: nebula-dashboard-ent/4.cluster-operator/operator/scale.md
@@ -688,6 +715,16 @@ nav:
           - 成员管理: nebula-dashboard-ent/4.cluster-operator/operator/member-management.md
           - 版本升级: nebula-dashboard-ent/4.cluster-operator/operator/version-upgrade.md
           - 备份恢复: nebula-dashboard-ent/4.cluster-operator/operator/backup-and-restore.md
+        - 分析诊断:
+          - 慢查询分析: nebula-dashboard-ent/4.cluster-operator/analysis-diagnosis/slow-query-analyst.md
+          - 集群诊断: nebula-dashboard-ent/4.cluster-operator/analysis-diagnosis/cluster-diagnosis.md 
+        - 集群信息: 
+          - 信息总览: nebula-dashboard-ent/4.cluster-operator/cluster-information/overview-info.md
+          - 作业管理: nebula-dashboard-ent/4.cluster-operator/cluster-information/job-management.md
+          - 审计日志: nebula-dashboard-ent/4.cluster-operator/cluster-information/audit-log.md
+          - 运行日志: nebula-dashboard-ent/4.cluster-operator/cluster-information/runtime-log.md
+        - 通知: nebula-dashboard-ent/4.cluster-operator/9.notification.md
+        - 数据同步: nebula-dashboard-ent/4.cluster-operator/7.data-synchronization.md
         - 操作记录: nebula-dashboard-ent/4.cluster-operator/5.operation-record.md
         - 其他设置: nebula-dashboard-ent/4.cluster-operator/6.settings.md
       - 权限管理: nebula-dashboard-ent/5.account-management.md
@@ -757,6 +794,7 @@ nav:
       - 使用流程: nebula-operator/6.get-started-with-operator.md
       - 部署 NebulaGraph Operator: nebula-operator/2.deploy-nebula-operator.md
       - 部署悦数图数据库: 
+        - 部署 LM: nebula-operator/3.deploy-nebula-graph-cluster/3.0.deploy-lm.md
         - 使用 Kubectl 部署: nebula-operator/3.deploy-nebula-graph-cluster/3.1create-cluster-with-kubectl.md
         - 使用 Helm 部署: nebula-operator/3.deploy-nebula-graph-cluster/3.2create-cluster-with-helm.md
       - 连接悦数图数据库: nebula-operator/4.connect-to-nebula-graph-service.md
@@ -783,7 +821,12 @@ nav:
       - 常见问题 FAQ: 20.appendix/0.FAQ.md
       - 生态工具概览: 20.appendix/6.eco-tool-version.md
       - 错误码: 20.appendix/error-code.md
-# nav.ent.begin
+
+# nav.pdf.begin
+  - PDF: ./pdf/yueshu-cn.pdf
+# nav.pdf.end
+# nav.ent.end
+
 
 # nav.comm.begin
 nav:
@@ -846,6 +889,7 @@ nav:
           - 集合运算符: 3.ngql-guide/5.operators/6.set.md
           - 字符串运算符: 3.ngql-guide/5.operators/7.string.md
           - 列表运算符: 3.ngql-guide/5.operators/8.list.md
+          - 算术运算符: 3.ngql-guide/5.operators/10.arithmetic.md
           - 运算符优先级: 3.ngql-guide/5.operators/9.precedence.md
 
       - 函数和表达式:
@@ -859,7 +903,7 @@ nav:
           - 条件表达式函数: 3.ngql-guide/6.functions-and-expressions/5.conditional-expressions.md
           - 谓词函数: 3.ngql-guide/6.functions-and-expressions/8.predicate.md
           - geo 函数: 3.ngql-guide/6.functions-and-expressions/14.geo.md
-
+        #  - 自定义函数: 3.ngql-guide/6.functions-and-expressions/9.user-defined-functions.md
       - 通用查询语句:
           - MATCH: 3.ngql-guide/7.general-query-statements/2.match.md
           - OPTIONAL MATCH: 3.ngql-guide/7.general-query-statements/optional-match.md
@@ -975,7 +1019,7 @@ nav:
 #      - 管理逻辑机架（Zone）: 4.deployment-and-installation/5.zone.md
 
       - 升级版本:
-          - 升级 NebulaGraph 至 v3.4（社区版）: 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest.md
+          - 升级 NebulaGraph 至 v3.5（社区版）: 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest.md
         #  - 升级 v3.x 至 v3.4（社区版）: 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-from-300-to-latest.md
       - 卸载 NebulaGraph: 4.deployment-and-installation/4.uninstall-nebula-graph.md
 
@@ -1061,10 +1105,9 @@ nav:
       - Dashboard 页面介绍: nebula-dashboard/4.use-dashboard.md
       - 监控指标说明: nebula-dashboard/6.monitor-parameter.md
 
-  - NebulaGraph Importer:
-    - 使用 NebulaGraph Importer: nebula-importer/use-importer.md
-    - 有表头配置说明: nebula-importer/config-with-header.md
-    - 无表头配置说明: nebula-importer/config-without-header.md
+  - NebulaGraph Importer: nebula-importer/use-importer.md
+#    - 有表头配置说明: nebula-importer/config-with-header.md
+#    - 无表头配置说明: nebula-importer/config-without-header.md
 
   - NebulaGraph Exchange:
     - 认识 NebulaGraph Exchange:
@@ -1132,8 +1175,7 @@ nav:
       - 年表: 20.appendix/history.md
       - 思维导图: 20.appendix/mind-map.md
       - 错误码: 20.appendix/error-code.md
-# nav.comm.end
-
 # nav.pdf.begin
   - PDF: ./pdf/NebulaGraph-CN.pdf
 # nav.pdf.end
+# nav.comm.end
