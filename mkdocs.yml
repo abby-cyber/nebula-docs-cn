@@ -350,7 +350,7 @@ extra:
     tag: v1.5.0
     branch: release-1.5
     upgrade_from: 3.5.0
-    upgrade_to: 3.5.x
+    upgrade_to: 3.6.0
   exporter:
     release: 3.3.0
     branch: release-3.3
@@ -1143,7 +1143,7 @@ nav:
         - 回收 PV: nebula-operator/8.custom-cluster-configurations/8.2.pv-reclaim.md 
         - 管理集群日志: nebula-operator/8.custom-cluster-configurations/8.4.manage-running-logs.md 
         - 配置滚动更新策略: nebula-operator/11.rolling-update-strategy.md
-#      - 升级 NebulaGraph: nebula-operator/9.upgrade-nebula-cluster.md
+      - 升级 NebulaGraph: nebula-operator/9.upgrade-nebula-cluster.md
       - 故障自愈: nebula-operator/5.operator-failover.md
       - 常见问题: nebula-operator/7.operator-faq.md
 
