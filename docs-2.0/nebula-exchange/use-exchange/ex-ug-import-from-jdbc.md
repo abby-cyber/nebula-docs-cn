@@ -80,6 +80,10 @@ mysql> desc serve;
 
 - 如果文件存储在本地且{{nebula.name}}是集群架构，需要在集群每台机器本地相同目录下放置文件。
 
+## 注意事项
+
+nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
+
 ## 操作步骤
 
 ### 步骤 1：在{{nebula.name}}中创建 Schema
@@ -202,11 +206,18 @@ mysql> desc serve;
       driver:"com.mysql.cj.jdbc.Driver"
 
       # 数据库用户名和密码。
-      user:root
+      user:"root"
       password:"12345"
 
-      table:player
-      sentence:"select playerid, age, name from player order by playerid"
+      # 扫描单个表读取数据。
+      # nebula-exchange_spark_2.2 必须配置该参数，还可以额外配置 sentence。
+      # nebula-exchange_spark_2.4 和 nebula-exchange_spark_3.0 可以配置该参数，但是不能和 sentence 同时配置。
+      table:"basketball.player"
+
+      # 通过查询语句读取数据。
+      # nebula-exchange_spark_2.2 可以配置该参数。不支持多表查询。在 from 后只需要写表名，不支持`库名.表名`。
+      # nebula-exchange_spark_2.4 和 nebula-exchange_spark_3.0 可以配置该参数，但是不能和 table 同时配置。支持多表查询。
+      # sentence:"select playerid, age, name from player, team order by playerid"
 
       # （可选）多连接读取参数 参见 https://spark.apache.org/docs/latest/sql-data-sources-jdbc.html
       partitionColumn:playerid    # 可选。数值类型必须为数字、日期或时间戳。
@@ -232,6 +243,12 @@ mysql> desc serve;
       #            newColName:new-field
       #        }
       }
+
+      # 批量操作类型，包括 INSERT、UPDATE 和 DELETE。默认为 INSERT。
+      #writeMode: INSERT
+
+      # 批量删除时是否删除该点关联的出边和入边。`writeMode`为`DELETE`时该参数生效。
+      #deleteEdge: false
 
       # 单批次写入 {{nebula.name}} 的数据条数。
       batch: 256
@@ -291,8 +308,17 @@ mysql> desc serve;
       driver:"com.mysql.cj.jdbc.Driver"
       user:root
       password:"12345"
-      table:follow
-      sentence:"select src_player,dst_player,degree from follow order by src_player"
+
+      # 扫描单个表读取数据。
+      # nebula-exchange_spark_2.2 必须配置该参数，还可以额外配置 sentence。
+      # nebula-exchange_spark_2.4 和 nebula-exchange_spark_3.0 可以配置该参数，但是不能和 sentence 同时配置。
+      table:"basketball.follow"
+
+      # 通过查询语句读取数据。
+      # nebula-exchange_spark_2.2 可以配置该参数。不支持多表查询。在 from 后只需要写表名，不支持`库名.表名`。
+      # nebula-exchange_spark_2.4 和 nebula-exchange_spark_3.0 可以配置该参数，但是不能和 table 同时配置。支持多表查询。
+      # sentence:"select src_player,dst_player,degree from follow order by src_player"
+
       partitionColumn:src_player    
       lowerBound:1                
       upperBound:5                
@@ -327,6 +353,9 @@ mysql> desc serve;
 
       # 指定一个列作为 rank 的源（可选）。
       #ranking: rank
+
+      # 批量操作类型，包括 INSERT、UPDATE 和 DELETE。默认为 INSERT。
+      #writeMode: INSERT
 
       # 单批次写入 {{nebula.name}} 的数据条数。
       batch: 256
