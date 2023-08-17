@@ -4,7 +4,7 @@
 
 ## 升级说明
 
-- 此升级操作仅适用于升级{{nebula.name}} 3.x（x < 4）至 {{nebula.release}}。对于升级 3.4.0 及以上版本至 {{nebula.release}}，可以直接替换二进制文件进行升级。具体操作请参见[升级{{nebula.name}} 至 {{nebula.release}}](https://docs.nebula-graph.com.cn/{{nebula.release}}/4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest/)。<!--因为企业版 {{nebula.name}} 3.4 中一个分片对应一个 RocksDB 实例不同于 3.4 之前的一个图空间对应一个 RocksDB 实例。因此企业版3.4.0和之前版本数据格式不兼容--> 
+- 此升级操作仅适用于升级{{nebula.name}} 3.x（x < 4）至 {{nebula.release}}。对于升级 3.4.0 及以上版本至 {{nebula.release}}，可以直接替换二进制文件进行升级。具体操作请参见[升级{{nebula.name}}至 {{nebula.release}}](https://docs.nebula-graph.com.cn/{{nebula.release}}/4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-comm/)。<!--因为企业版 {{nebula.name}} 3.4 中一个分片对应一个 RocksDB 实例不同于 3.4 之前的一个图空间对应一个 RocksDB 实例。因此企业版3.4.0和之前版本数据格式不兼容--> 
   
   !!! note
 
@@ -59,20 +59,20 @@
     | :-------------- | :--------------------------- |
     | `--max_concurrent_parts` | 指定同时升级的分片数量，默认值为 `1`。<br/>建议根据磁盘性能适当调大。 |
     | `--src_db_path` | 指定源数据目录的绝对路径。下述示例源数据的目录为`/usr/local/nebula-ent-3.1.0/data/storage`。  |
-    | `--dst_db_path` | 指定目标数据目录的绝对路径。本文示例的目标数据目录为`/usr/local/nebula-ent-3.4/data/storage`。|
+    | `--dst_db_path` | 指定目标数据目录的绝对路径。本文示例的目标数据目录为`/usr/local/nebula-ent-{{nebula.release}}/data/storage`。|
 
     示例：
 
     ```bash
-    sudo ./bin/db_upgrader --max_concurrent_parts=20 --src_db_path=/usr/local/nebula-ent-3.1.0/data/storage --dst_db_path=/usr/local/nebula-ent-3.4/data/storage
+    sudo ./bin/db_upgrader --max_concurrent_parts=20 --src_db_path=/usr/local/nebula-ent-3.1.0/data/storage --dst_db_path=/usr/local/nebula-ent-{{nebula.release}}/data/storage
     ```
 
     如果有多个源数据目录，请分别指定不同的源数据目录和目标数据目录并执行命令。例如，有两个源数据目录`/usr/local/nebula-ent-3.1.0/data/storage`和`/usr/local/nebula-ent-3.1.0/data2/storage`，则执行以下命令：
 
     ```bash
-    sudo ./bin/db_upgrader --src_db_path=/usr/local/nebula-ent-3.1.0/data/storage --dst_db_path=/usr/local/nebula-ent-3.4/data/storage
+    sudo ./bin/db_upgrader --src_db_path=/usr/local/nebula-ent-3.1.0/data/storage --dst_db_path=/usr/local/nebula-ent-{{nebula.release}}/data/storage
 
-    sudo ./bin/db_upgrader --src_db_path=/usr/local/nebula-ent-3.1.0/data2/storage --dst_db_path=/usr/local/nebula-ent-3.4/data2/storage
+    sudo ./bin/db_upgrader --src_db_path=/usr/local/nebula-ent-3.1.0/data2/storage --dst_db_path=/usr/local/nebula-ent-{{nebula.release}}/data2/storage
     ```
 
   - 升级 Meta 服务：
@@ -86,12 +86,12 @@
     | 参数            | 说明                         |
     | :-------------- | :--------------------------- |
     | `--src_meta_path` | 指定源 Meta 数据目录的绝对路径。下述示例源数据的目录为`/usr/local/nebula-ent-3.1.0/data/meta`。  |
-    | `--dst_meta_path` | 指定目标 Meta 数据目录的绝对路径。本文示例的目标数据目录为`/usr/local/nebula-ent-3.4/data/meta`。|
+    | `--dst_meta_path` | 指定目标 Meta 数据目录的绝对路径。本文示例的目标数据目录为`/usr/local/nebula-ent-{{nebula.release}}/data/meta`。|
 
     示例：
 
     ```bash
-    sudo ./bin/meta_upgrader --src_meta_path=/usr/local/nebula-ent-3.1.0/data/meta --dst_meta_path=/usr/local/nebula-ent-3.4/data/meta
+    sudo ./bin/meta_upgrader --src_meta_path=/usr/local/nebula-ent-3.1.0/data/meta --dst_meta_path=/usr/local/nebula-ent-{{nebula.release}}/data/meta
     ```
 
     如果有多个源 Meta 数据目录，请指定不同的源 Meta 数据目录和目标 Meta 数据目录并分别执行命令。
