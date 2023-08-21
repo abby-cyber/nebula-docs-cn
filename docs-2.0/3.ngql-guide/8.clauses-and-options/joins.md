@@ -1,6 +1,6 @@
 # INNER JOIN
 
-`INNER JOIN`是一种连接查询，用于将两个表关联在一起，只返回在两个表中都存在的行。在 NebulaGraph 中，`INNER JOIN`子句可以用来在两个表格之间进行连接查询，以获取更加复杂的查询结果。
+`INNER JOIN`是一种连接查询，用于将两个表关联在一起，只返回在两个表中都存在的行。在{{nebula.name}}中，`INNER JOIN`子句可以用来在两个表之间进行连接查询，以获取更加复杂的查询结果。
 
 ## openCypher 兼容性
 
