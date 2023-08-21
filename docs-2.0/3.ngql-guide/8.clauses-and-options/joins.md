@@ -1,6 +1,10 @@
 # INNER JOIN
 
-`INNER JOIN`是一种连接查询。它基于两个表之间的共同列值进行匹配，并返回满足条件的记录。`INNER JOIN`通常用于根据关联列的值来创建一个包含两个表的结果集。在{{nebula.name}}中，`INNER JOIN`子句可以用来在两个表之间进行连接查询，以获取更加复杂的查询结果。
+`INNER JOIN`是一种连接查询。它基于两个表之间的共同列值进行匹配，并返回满足条件的记录。`INNER JOIN`通常用于根据关联列的值来创建一个包含两个表的结果集。在{{nebula.name}}中，可以显示地使用`INNER JOIN`子句在两个表之间进行连接查询，以获取更加复杂的查询结果。
+
+!!! note
+
+    在 nGQL 语句中，`GO`的多跳查询隐式地使用了`INNER JOIN`子句。例如，`GO 1 TO 2 STEPS FROM "player101" OVER follow YIELD $$.player.name AS name, $$.player.age AS age`语句中，`GO`子句隐式地使用了`INNER JOIN`子句，将从`player101`出发沿`follow`边第一步查询的结果列和第二步查询的起点列进行匹配，然后基于匹配结果返回`name`和`age`。
 
 ## openCypher 兼容性
 
@@ -16,10 +20,10 @@ FROM <first_table> INNER JOIN <second_table> ON <join_condition>
 ## 使用说明
 
 - 必须使用`YIELD`子句指定返回的列，并且`YIELD`子句需放置在`INNER JOIN`子句之前。
+- 使用`FROM`子句指定要连接的两个表。
 - `INNER JOIN`子句必须包含`ON`子句，`ON`子句指定了连接条件，并且连接条件只支持等值连接（即`==`）。
 - `<first_table>`和`<second_table>`是要连接的两个表，两表名不能相同。
-- 使用自定义变量来指定表格名。详情参见[使用自定义变量](../3.ngql-guide/4.variable-and-composite-queries/2.user-defined-variables.md)。
-- 在 3.6.0 版本之前的 nGQL 语法中，只有`GO`语句支持使用`INNER JOIN`子句。在 3.6.0 版本及之后的 nGQL 语法中，`FETCH`、`LOOKUP`、`FIND PATH`和`GET SUBGRAPH`语句都可使用`INNER JOIN`子句。
+- 使用自定义变量来指定表名。详情参见[使用自定义变量](../3.ngql-guide/4.variable-and-composite-queries/2.user-defined-variables.md)。
 
 ## 使用示例
 
