@@ -138,6 +138,7 @@ plugins:
         - nebula-cloud/nebula-cloud-on-alibabacloud/3.delete-service-instance.md
         - nebula-cloud/nebula-cloud-on-alibabacloud/4.scaling-services.md
         - 3.ngql-guide/6.functions-and-expressions/9.user-defined-functions.md
+        - 4.deployment-and-installation/5.zone.md
         # exclude.ent.end
         # exclude.comm.begin  (hide the comm-doc when releasing ent)
         - nebula-dashboard/1.what-is-dashboard.md
@@ -579,7 +580,7 @@ nav:
       - 管理服务: 4.deployment-and-installation/manage-service.md
       - 连接服务: 4.deployment-and-installation/connect-to-nebula-graph.md
       - 管理 Storage 主机: 4.deployment-and-installation/manage-storage-host.md
-#      - 管理逻辑机架（Zone）: 4.deployment-and-installation/5.zone.md
+      - 管理 Zone: 4.deployment-and-installation/5.zone.md
       - 升级版本: 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-ent.md
       - 卸载悦数图数据库: 4.deployment-and-installation/4.uninstall-nebula-graph.md
 

@@ -144,13 +144,13 @@
   | ------------------------------------------------------------ |
   |[创建快照](https://docs.nebula-graph.com.cn/{{nebula.release}}/backup-and-restore/3.manage-snapshot/#_5)|
 
-<!--
+ {{ent.ent_begin}}
 - 资源隔离
 
   | 文档 |
   | ------------------------------------------------------------ |
-  |[Group & Zone](https://docs.nebula-graph.com.cn/{{nebula.release}}/7.data-security/5.zone/)|
--->
+  |[Zone](../4.deployment-and-installation/5.zone.md)|
+  {{ent.ent_end}}
 
 - SSL 加密
 
