@@ -255,7 +255,7 @@ nebula> SHOW HOSTS;
 -->
 ## 均衡 leader 分布
 
-用户可以使用命令`SUBMIT JOB BALANCE LEADER`均衡分布所有图空间中的 leader。
+用户可以使用命令`SUBMIT JOB BALANCE LEADER`均衡分布所有图空间中的 Leader 副本。
 
 ### 示例
 
@@ -281,4 +281,5 @@ nebula> SHOW HOSTS;
 
 !!! caution
 
-    在{{nebula.name}} {{ nebula.release }} 中，Leader 切换会导致短时的大量请求错误（Storage Error `E_RPC_FAILURE`），处理方法见 [FAQ](../20.appendix/0.FAQ.md)。
+    在{{nebula.name}} {{ nebula.release }} 中，Leader 副本切换期间，Leader 副本所在的分片会被暂时禁止写入直到 Leader 切换完成。如果在 Leader 副本切换期间，有大量的写入请求，将会导致请求错误（Storage Error `E_RPC_FAILURE`），处理方法见 [FAQ](../20.appendix/0.FAQ.md#storage_error_e_rpc_failure)。用户可以在 Storage 配置文件中设置`raft_heartbeat_interval_secs`的值来控制 Leader 副本切换的超时时间。如果 Leader 切换超时，会导致请求错误（Storage Error `E_RPC_FAILURE`）。有关配置文件的详细信息，请参见[ Storage 配置文件](../5.configurations-and-logs/1.configurations/4.storage-config.md)。
+
