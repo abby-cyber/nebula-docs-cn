@@ -270,6 +270,14 @@
     --port=9779
     ```
 
+{{ent.ent_begin}}
+### (可选) 配置 Zone
+
+Zone 是 Storage 节点的逻辑机架。用户可以通过配置 Zone 并将指定 Storage 节点加入到 Zone 中，同时配置 Graph 服务定向访问指定 Zone，来实现资源隔离和数据的定向访问，从而减少流量消耗以节约成本。
+
+详情请参见[Zone](../../4.deployment-and-installation/5.zone.md)。
+{{ent.ent_end}}
+
 ### 启动集群
 
 依次启动**各个服务器**上的对应进程。

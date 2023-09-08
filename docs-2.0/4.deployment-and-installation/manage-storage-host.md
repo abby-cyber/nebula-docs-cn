@@ -31,6 +31,12 @@ nebula> ADD HOSTS "<hostname>":<port> [,"<hostname>":<port> ...];
 
     - 确保新增的 Storage 主机没有被其他集群使用过，否则会导致添加 Storage 节点失败。
 
+{{ent.ent_begin}}
+
+向开启了 Zone 功能的集群中增加 Storage 主机时，需要指定`INTO ZONE`选项，否则会导致添加 Storage 节点失败。详情参见[管理 Zone](5.zone.md)。
+
+{{ent.ent_end}}
+
 ## 删除 Storage 主机
 
 从集群中删除 Storage 主机。
