@@ -23,7 +23,7 @@
 !!! note
 
     - 如果当前图空间已经有失败的均衡分片分布作业，无法开始新的均衡分片分布作业，只能恢复之前失败的作业。如果作业一直执行失败，可以先停止作业，再开始新的均衡分片分布作业。
-    - 本文介绍默认不开启 Zone 功能的均衡分片分布及迁移 Storage 节点数据方法。当开启 Zone 功能后，必须添加`IN ZONE [<zone_name>]`选项均衡分片分布。详情参见[管理 Zone](../4.deployment-and-installation/5.zone.md)。
+    - 本文介绍默认不开启 Zone 功能的均衡分片分布及迁移 Storage 节点数据方法。当开启 Zone 功能后，必须添加`IN ZONE`选项均衡分片分布。详情参见[管理 Zone](../4.deployment-and-installation/5.zone.md)。
 
 ### 示例
 
@@ -106,7 +106,9 @@
 
 ### 迁移分片
 
-迁移指定的 Storage 主机中的分片来缩小集群规模，可以使用命令`SUBMIT JOB BALANCE DATA REMOVE <ip:port> [,<ip>:<port> ...]`。如果移除开启了 Zone 功能的 Storage 节点，请添加`IN ZONE`选项，详情参见[管理 Zone](../4.deployment-and-installation/5.zone.md)。
+迁移指定的 Storage 主机中的分片来缩小集群规模，可以使用命令`SUBMIT JOB BALANCE DATA REMOVE <ip:port> [,<ip>:<port> ...]`。
+
+如果移除开启了 Zone 功能的 Storage 节点，请添加`IN ZONE`选项，详情参见[管理 Zone](../4.deployment-and-installation/5.zone.md)。
 
 例如需要迁移`192.168.8.100:9779`中的分片，请执行如下命令：
 
