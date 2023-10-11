@@ -223,13 +223,13 @@ extra:
       link: 'https://github.com/vesoft-inc/nebula-docs-cn'
 # nav.comm.end
   nebula:
-    release: 3.5.0
+    release: master
     nightly: nightly
     master: master
     base20: 2.0
     base200: 2.0.0
-    branch: release-3.5
-    tag: v3.5.0
+    branch: master
+    tag: master
     # nav.ent.begin
     name: 悦数图数据库
     # nav.ent.end
@@ -1003,8 +1003,8 @@ nav:
   - 安装部署:
       - 准备资源: 4.deployment-and-installation/1.resource-preparations.md
       - 编译安装:
-        - 编译源码: 4.deployment-and-installation/2.compile-and-install-nebula-graph/1.install-nebula-graph-by-compiling-the-source-code.md
-#        - 使用 Docker 编译: 
+        - 源码编译: 4.deployment-and-installation/2.compile-and-install-nebula-graph/1.install-nebula-graph-by-compiling-the-source-code.md
+        - 使用 Docker 编译: 4.deployment-and-installation/2.compile-and-install-nebula-graph/7.compile-using-docker.md
       - 本地单机安装:
           - 使用 RPM/DEB 包安装: 4.deployment-and-installation/2.compile-and-install-nebula-graph/2.install-nebula-graph-by-rpm-or-deb.md
           - 使用 TAR 包安装: 4.deployment-and-installation/2.compile-and-install-nebula-graph/4.install-nebula-graph-from-tar.md

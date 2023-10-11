@@ -339,7 +339,7 @@ sources:
 |:---|:---|:---|:---|
 |`sources.path`</br>`sources.s3`</br>`sources.oss`</br>`sources.ftp`</br>`sources.sftp`</br>`sources.hdfs`   |-| 否 | 指定数据源信息，例如本地文件、HDFS、S3 等。一个`source`只能配置一种数据源，配置多个数据源请在多个`source`内配置。</br>不同数据源的配置项说明请参见示例内的注释。         |  
 |`sources.batch`   |`256`| 否 | 导入该数据源时执行语句的批处理量。优先级高于`manager.batch`。          |  
-|`sources.csv.delimiter`   |`,`| 否 |  CSV 文件的分隔符。仅支持 1 个字符的字符串分隔符。使用特殊字符做分隔符时需要进行转义。例如当分隔符为十六进制`0x03`即`Ctrl+C`时，转义的写法为：`"\x03"`或`"\u0003"`。关于 yaml 格式特殊字符转义的细节请参见[Escaped Characters](https://yaml.org/spec/1.2.2/#escaped-characters)。|         |  
+|`sources.csv.delimiter`   |`,`| 否 |  CSV 文件的分隔符。仅支持 1 个字符的字符串分隔符。特殊字符做分隔符时应使用对应的转义序列来表示，并包裹在双引号内进行转义。例如，制表符`\t`应写为`"\t"`，而不是`'\t'`；十六进制的`0x03` (`Ctrl+C`) 应写为`"\x03"`或`"\u0003"`。关于 yaml 格式特殊字符转义的细节请参见[Escaped Characters](https://yaml.org/spec/1.2.2/#escaped-characters)。|         |  
 |`sources.csv.withHeader`   |`false`| 否 | 是否忽略 CSV 文件中的第一条记录。         |  
 |`sources.csv.lazyQuotes`   |`false`| 否 | 是否允许惰性解析引号。如果值为`true`，引号可以出现在非引号字段中，非双引号可以出现在引号字段中，而不会引发解析错误。    |  
 |`sources.tags.name`   |-| 是 | Tag 名称。         |  
