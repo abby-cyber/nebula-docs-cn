@@ -138,7 +138,7 @@
   # 在 audit 文件中添加配置以设置日志轮转规则
   /usr/local/nebula/logs/audit/audit.log {
       daily
-      rotate 7
+      rotate 5
       copytruncate
       nocompress
       missingok
@@ -154,8 +154,8 @@
 
   |参数|说明|
   |:--|:--|
-  |`daily`| 每天轮转日志。可用的时间单位有：`daily`、`weekly`、`yearly`。|
-  |`rotate 7`| 保留最近7天的日志。|
+  |`daily`| 每天轮转日志。可用的时间单位有：`hourly`、`daily`、`weekly`、`monthly`、`yearly`。|
+  |`rotate 5`| 在删除前日志文件前，其被轮转的次数。即保留最近生成的 5 个日志文件。|
   |`copytruncate`| 将当前日志文件复制一份，然后清空当前日志文件。|
   |`nocompress`| 不压缩旧的日志文件。|
   |`missingok`| 如果日志文件丢失，不报告错误。|
@@ -167,7 +167,7 @@
 
   用户可以根据实际需求修改配置文件中的参数。更多关于参数的配置及解释，参见 [logrotate](https://man7.org/linux/man-pages/man8/logrotate.8.html)。
 
-3. 测试 logrotate 配置。
+1. 测试 logrotate 配置。
 
   为了验证 logrotate 的配置是否正确，可以使用以下命令来进行测试：
 
@@ -187,9 +187,9 @@
 
 5. 查看日志轮转结果。
 
-  日志轮转后，会在`/usr/local/nebula/logs/audit`目录下看到新的日志文件，例如`audit.log.2022-04-07-1649298693`。原始日志会被清空，但保留，新日志继续写入。当日志数量超过`rotate`值时，最旧的日志将被删除。
+  日志轮转后，会在`/usr/local/nebula/logs/audit`目录下看到新的日志文件，例如`audit.log.2022-04-07-1649298693`。原始日志内容会被清空，但文件会被保留，新日志继续写入。当日志数量超过`rotate`值时，最旧的日志将被删除。
 
-  当日志文件数量超过`rotate`设置的值时，会删除最旧的日志文件。例如，`rotate 5`表示保留最近 5 天的日志文件，当日志文件数量超过 5 个时，会删除最旧的日志文件。
+  当日志文件数量超过`rotate`设置的值时，会删除最旧的日志文件。例如，`rotate 5`表示保留最近生成的 5 个日志文件，当日志文件数量超过 5 个时，会删除最旧的日志文件。
 
   ```bash
   [test@test audit]$ ll
