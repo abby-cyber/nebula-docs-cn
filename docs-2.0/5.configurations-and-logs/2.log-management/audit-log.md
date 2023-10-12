@@ -167,7 +167,7 @@
 
   用户可以根据实际需求修改配置文件中的参数。更多关于参数的配置及解释，参见 [logrotate](https://man7.org/linux/man-pages/man8/logrotate.8.html)。
 
-1. 测试 logrotate 配置。
+3. 测试 logrotate 配置。
 
   为了验证 logrotate 的配置是否正确，可以使用以下命令来进行测试：
 
