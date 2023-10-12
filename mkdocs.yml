@@ -77,6 +77,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  # Make content collapsible
+  - pymdownx.details
 
 # Plugins
 plugins:
@@ -100,7 +102,6 @@ plugins:
         - nebula-cloud.md
         - nebula-cloud/nebula-cloud-on-azure/*
         - spark-connector/*
-        - 4.deployment-and-installation/5.zone.md
         - 4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-from-200-to-latest.md
         - 9.about-license/3.purchase-license.md
         - 9.about-license/4.generate-and-load-license-key.md
