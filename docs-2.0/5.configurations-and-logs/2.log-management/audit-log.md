@@ -167,46 +167,46 @@
 
   用户可以根据实际需求修改配置文件中的参数。更多关于参数的配置及解释，参见 [logrotate](https://man7.org/linux/man-pages/man8/logrotate.8.html)。
 
-1. 测试 logrotate 配置。
+3. 测试 logrotate 配置。
 
-为了验证 logrotate 的配置是否正确，可以使用以下命令来进行测试：
+  为了验证 logrotate 的配置是否正确，可以使用以下命令来进行测试：
 
-```bash
-sudo logrotate --debug /etc/logrotate.d/audit
-```
+  ```bash
+  sudo logrotate --debug /etc/logrotate.d/audit
+  ```
 
 4. 运行 logrotate。
 
-尽管`logrotate`通常由 Cron 作业自动执行，但也可以手动执行以下命令，以立即进行日志轮转：
+  尽管`logrotate`通常由 Cron 作业自动执行，但也可以手动执行以下命令，以立即进行日志轮转：
 
-```bash
-sudo logrotate -fv /etc/logrotate.d/audit
-```
+  ```bash
+  sudo logrotate -fv /etc/logrotate.d/audit
+  ```
 
-`-fv`：`f`表示强制执行，`v`表示打印详细信息。
+  `-fv`：`f`表示强制执行，`v`表示打印详细信息。
 
 5. 查看日志轮转结果。
 
-日志轮转后，会在`/usr/local/nebula/logs/audit`目录下看到新的日志文件，例如`audit.log.2022-04-07-1649298693`。原始日志会被清空，但保留，新日志继续写入。当日志数量超过`rotate`值时，最旧的日志将被删除。
+  日志轮转后，会在`/usr/local/nebula/logs/audit`目录下看到新的日志文件，例如`audit.log.2022-04-07-1649298693`。原始日志会被清空，但保留，新日志继续写入。当日志数量超过`rotate`值时，最旧的日志将被删除。
 
-当日志文件数量超过`rotate`设置的值时，会删除最旧的日志文件。例如，`rotate 5`表示保留最近 5 天的日志文件，当日志文件数量超过 5 个时，会删除最旧的日志文件。
+  当日志文件数量超过`rotate`设置的值时，会删除最旧的日志文件。例如，`rotate 5`表示保留最近 5 天的日志文件，当日志文件数量超过 5 个时，会删除最旧的日志文件。
 
-```bash
-[test@test audit]$ ll
--rw-r--r-- 1 root root    0 10月 12 11:15 audit.log
--rw-r--r-- 1 root root 1436 10月 11 19:38 audit.log-202310111697024305 # 保留的日志文件中最旧的一个，当日志文件数量超过设定数量 5 时，会删除该文件。
--rw-r--r-- 1 root root  286 10月 12 11:05 audit.log-202310121697079901
--rw-r--r-- 1 root root  571 10月 12 11:05 audit.log-202310121697079940
--rw-r--r-- 1 root root  571 10月 12 11:14 audit.log-202310121697080478
--rw-r--r-- 1 root root  571 10月 12 11:15 audit.log-202310121697080536
-[test@test audit]$ ll
--rw-r--r-- 1 root root 571 10月 12 11:18 audit.log
--rw-r--r-- 1 root root 286 10月 12 11:05 audit.log-202310121697079901
--rw-r--r-- 1 root root 571 10月 12 11:05 audit.log-202310121697079940
--rw-r--r-- 1 root root 571 10月 12 11:14 audit.log-202310121697080478
--rw-r--r-- 1 root root 571 10月 12 11:15 audit.log-202310121697080536
--rw-r--r-- 1 root root 571 10月 12 11:17 audit.log-202310121697080677 # 新生成的日志文件。
-```
+  ```bash
+  [test@test audit]$ ll
+  -rw-r--r-- 1 root root    0 10月 12 11:15 audit.log
+  -rw-r--r-- 1 root root 1436 10月 11 19:38 audit.log-202310111697024305 # 保留的日志文件中最旧的一个，当日志文件数量超过设定数量 5 时，会删除该文件。
+  -rw-r--r-- 1 root root  286 10月 12 11:05 audit.log-202310121697079901
+  -rw-r--r-- 1 root root  571 10月 12 11:05 audit.log-202310121697079940
+  -rw-r--r-- 1 root root  571 10月 12 11:14 audit.log-202310121697080478
+  -rw-r--r-- 1 root root  571 10月 12 11:15 audit.log-202310121697080536
+  [test@test audit]$ ll
+  -rw-r--r-- 1 root root 571 10月 12 11:18 audit.log
+  -rw-r--r-- 1 root root 286 10月 12 11:05 audit.log-202310121697079901
+  -rw-r--r-- 1 root root 571 10月 12 11:05 audit.log-202310121697079940
+  -rw-r--r-- 1 root root 571 10月 12 11:14 audit.log-202310121697080478
+  -rw-r--r-- 1 root root 571 10月 12 11:15 audit.log-202310121697080536
+  -rw-r--r-- 1 root root 571 10月 12 11:17 audit.log-202310121697080677 # 新生成的日志文件。
+  ```
 
 ## 视频
 
