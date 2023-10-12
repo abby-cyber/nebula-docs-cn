@@ -146,7 +146,7 @@
       create 644 root root
       dateext
       dateformat .%Y-%m-%d-%s
-      maxsize 1M
+      maxsize 500
   }
   ```
   
