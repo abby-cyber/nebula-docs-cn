@@ -133,7 +133,7 @@
 
   !!! note
 
-        不同安装包的升级步骤相同。本文以 RPM 包且安装目录为`/usr/local/nebulagraph-ent-{{nebula.release}}`为例。具体操作请参见[安装 RPM 包](../2.compile-and-install-nebula-graph/2.install-nebula-graph-by-rpm-or-deb.md)。 
+        不同安装包的升级步骤相同。本文以 RPM 包且安装目录为`/usr/local/yueshu-{{nebula.release}}`为例。具体操作请参见[安装 RPM 包](../2.compile-and-install-nebula-graph/2.install-nebula-graph-by-rpm-or-deb.md)。 
    
   !!! caution
 
@@ -155,21 +155,21 @@
     | 参数            | 说明                         |
     | :-------------- | :--------------------------- |
     | `--max_concurrent_parts` | 指定同时升级的分片数量，默认值为 `1`。<br/>建议根据磁盘性能适当调大。 |
-    | `--src_db_path` | 指定源数据目录的绝对路径。下述示例源数据的目录为`/usr/local/nebula-ent-3.1.0/data/storage`。  |
-    | `--dst_db_path` | 指定目标数据目录的绝对路径。本文示例的目标数据目录为`/usr/local/nebula-ent-{{nebula.release}}/data/storage`。|
+    | `--src_db_path` | 指定源数据目录的绝对路径。下述示例源数据的目录为`/usr/local/yueshu-3.x.0/data/storage`。  |
+    | `--dst_db_path` | 指定目标数据目录的绝对路径。本文示例的目标数据目录为`/usr/local/yueshu-{{nebula.release}}/data/storage`。|
 
     示例：
 
     ```bash
-    sudo ./bin/db_upgrader --max_concurrent_parts=20 --src_db_path=/usr/local/nebula-ent-3.1.0/data/storage --dst_db_path=/usr/local/nebula-ent-{{nebula.release}}/data/storage
+    sudo ./bin/db_upgrader --max_concurrent_parts=20 --src_db_path=/usr/local/yueshu-3.x.0/data/storage --dst_db_path=/usr/local/yueshu-{{nebula.release}}/data/storage
     ```
 
-    如果有多个源数据目录，请分别指定不同的源数据目录和目标数据目录并执行命令。例如，有两个源数据目录`/usr/local/nebula-ent-3.1.0/data/storage`和`/usr/local/nebula-ent-3.1.0/data2/storage`，则执行以下命令：
+    如果有多个源数据目录，请分别指定不同的源数据目录和目标数据目录并执行命令。例如，有两个源数据目录`/usr/local/yueshu-3.x.0/data/storage`和`/usr/local/yueshu-3.x.0/data2/storage`，则执行以下命令：
 
     ```bash
-    sudo ./bin/db_upgrader --src_db_path=/usr/local/nebula-ent-3.1.0/data/storage --dst_db_path=/usr/local/nebula-ent-{{nebula.release}}/data/storage
+    sudo ./bin/db_upgrader --src_db_path=/usr/local/yueshu-3.x.0/data/storage --dst_db_path=/usr/local/yueshu-{{nebula.release}}/data/storage
 
-    sudo ./bin/db_upgrader --src_db_path=/usr/local/nebula-ent-3.1.0/data2/storage --dst_db_path=/usr/local/nebula-ent-{{nebula.release}}/data2/storage
+    sudo ./bin/db_upgrader --src_db_path=/usr/local/yueshu-3.x.0/data2/storage --dst_db_path=/usr/local/yueshu-{{nebula.release}}/data2/storage
     ```
 
   - 升级 Meta 服务：
@@ -182,13 +182,13 @@
 
     | 参数            | 说明                         |
     | :-------------- | :--------------------------- |
-    | `--src_meta_path` | 指定源 Meta 数据目录的绝对路径。下述示例源数据的目录为`/usr/local/nebula-ent-3.1.0/data/meta`。  |
-    | `--dst_meta_path` | 指定目标 Meta 数据目录的绝对路径。本文示例的目标数据目录为`/usr/local/nebula-ent-{{nebula.release}}/data/meta`。|
+    | `--src_meta_path` | 指定源 Meta 数据目录的绝对路径。下述示例源数据的目录为`/usr/local/yueshu-3.x.0/data/meta`。  |
+    | `--dst_meta_path` | 指定目标 Meta 数据目录的绝对路径。本文示例的目标数据目录为`/usr/local/yueshu-{{nebula.release}}/data/meta`。|
 
     示例：
 
     ```bash
-    sudo ./bin/meta_upgrader --src_meta_path=/usr/local/nebula-ent-3.1.0/data/meta --dst_meta_path=/usr/local/nebula-ent-{{nebula.release}}/data/meta
+    sudo ./bin/meta_upgrader --src_meta_path=/usr/local/yueshu-3.x.0/data/meta --dst_meta_path=/usr/local/yueshu-{{nebula.release}}/data/meta
     ```
 
     如果有多个源 Meta 数据目录，请指定不同的源 Meta 数据目录和目标 Meta 数据目录并分别执行命令。
@@ -217,7 +217,7 @@
 
 ## 升级历史版本至 {{nebula.release}}
 
-如果用户悦数图数据库版本低于 3.0.0，请先升级到 3.1.0 再升级到 {{nebula.release}}。具体操作请参见[升级{{nebula.name}} 2.x 至 3.1.0](https://docs.nebula-graph.com.cn/3.1.0/4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest/)。
+如果用户悦数图数据库版本低于 3.0.0，请先升级到 3.1.0 再升级到 {{nebula.release}}。具体操作请参见[升级{{nebula.name}} 2.x 至 3.1.0](https://docs.nebula-graph.com.cn/3.x.0/4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest/)。
 
 !!! note
 
