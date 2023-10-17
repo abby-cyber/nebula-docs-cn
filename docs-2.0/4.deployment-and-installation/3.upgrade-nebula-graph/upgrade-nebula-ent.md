@@ -93,7 +93,7 @@
   LM 用于校验{{nebula.name}}的授权信息，详情参见[LM 配置](../../9.about-license/2.license-management-suite/3.license-manager.md)。
 
   !!! note
-        3.5.0 及之后版本，{{nebula.name}}开启 License 校验，需要安装和配置 LM。
+        3.5.0 及之后版本，启动{{nebula.name}}会进行 License 校验，需要提前安装和配置 LM。
 
 5. 启动和连接{{nebula.name}} v{{nebula.release}} 服务后，验证数据是否正确。参考命令如下：
 
