@@ -126,6 +126,7 @@
 
 <!--因为企业版 {{nebula.name}} 3.4 中一个分片对应一个 RocksDB 实例不同于 3.4 之前的一个图空间对应一个 RocksDB 实例。因此企业版3.4.0和之前版本数据格式不兼容，但是和3.4之后的版本数据兼容--> 
 
+
 1. [联系我们获取](https://yueshu.com.cn/contact){{nebula.name}} v{{nebula.release}} 的安装包并安装。
 
   !!! note
@@ -136,10 +137,30 @@
 
         请确保 {{nebula.release}} 集群的 Meta 服务和 Storage 服务的配置文件中的`--data_path`参数设置的存储路径数量与 3.x 集群的配置文件中的`--data_path`参数配置的路径数量相同。否则，升级后的集群无法启动。
 
-2. 停止{{nebula.name}} v3.x 服务。详情请参见[管理{{nebula.name}}服务](../../2.quick-start/3.quick-start-on-premise/5.start-stop-service.md)。
+2. 备份{{nebula.name}} 3.x 版本的数据目录和二进制文件。
+
+  !!! note
+
+        请务必备份数据，防止丢失。
+
+3. 停止{{nebula.name}} v3.x 服务。详情请参见[管理{{nebula.name}}服务](../../2.quick-start/3.quick-start-on-premise/5.start-stop-service.md)。
   运行命令后可继续运行`nebula.service status all`命令以确认所有服务都已停止。
+
+4. 在{{nebula.name}} v{{nebula.release}} 安装目录的子目录`etc`中，更新配置文件（如果之前有配置更新的话）。
+
+  !!! note
+
+        如果之前没有配置更新，可跳过此步骤。
+
+
+5. 在`nebula-metad.conf`文件中配置`license_manager_url`参数，指定 LM 的路径。
+
+  LM 用于校验{{nebula.name}}的授权信息，详情参见[LM 配置](../../9.about-license/2.license-management-suite/3.license-manager.md)。
+
+  !!! note
+        3.5.0及之后版本，企业版开启 License 校验，需要安装和配置 LM。
    
-3. 在{{nebula.name}} v{{nebula.release}} 的安装目录下，分别执行以下命令以升级 Storage 和 Meta 服务。<!-- 不需要事先创建`data`目录 -->
+6. 在{{nebula.name}} v{{nebula.release}} 的安装目录下，分别执行以下命令以升级 Storage 和 Meta 服务。<!-- 不需要事先创建`data`目录 -->
 
   - 升级 Storage 服务：
 
@@ -192,12 +213,6 @@
 
   服务升级完成后，会在 v{{nebula.release}} 的安装目录下生成`data`目录，其中包含升级后的数据文件。
 
-4. 在`<install_path>/ent_yueshu_3.6.0/etc/nebula-metad.conf`中配置`license_manager_url`参数，指定 LM 的路径。
-
-  LM 用于校验{{nebula.name}}的授权信息，详情参见[LM 配置](../../9.about-license/2.license-management-suite/3.license-manager.md)。
-
-  !!! note
-        3.5.0及之后版本，企业版开启 License 校验，需要安装和配置 LM。
 
 5. 启动和连接{{nebula.name}} v{{nebula.release}} 服务后，验证数据是否正确。参考命令如下：
 
@@ -214,7 +229,7 @@
 
 ## 升级历史版本至 {{nebula.release}}
 
-如果用户悦数图数据库版本低于 3.0.0，请先升级到 3.1.0 再升级到 {{nebula.release}}。具体操作请参见[升级{{nebula.name}} 2.x 至 3.1.0](https://docs.nebula-graph.com.cn/3.x.0/4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest/)。
+如果用户悦数图数据库版本低于 3.0.0，请先升级到 3.1.3 再升级到 {{nebula.release}}。具体操作请参见[升级{{nebula.name}} 2.x 至 3.1.3](https://docs.nebula-graph.com.cn/3.1.3/4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest/)。
 
 !!! note
 
