@@ -122,9 +122,6 @@
   nebula> MATCH (v) RETURN v LIMIT 5;
   ```
 
-  也可根据 {{nebula.release}} 版本的新功能测试，新功能列表参见[发布说明](../../20.appendix/release-notes/nebula-comm-release-note.md)。
-
-
 ## 升级 3.x（x < 4）至 {{nebula.release}}
 
 <!--因为企业版 {{nebula.name}} 3.4 中一个分片对应一个 RocksDB 实例不同于 3.4 之前的一个图空间对应一个 RocksDB 实例。因此企业版3.4.0和之前版本数据格式不兼容，但是和3.4之后的版本数据兼容--> 
