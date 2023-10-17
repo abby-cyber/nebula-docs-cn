@@ -88,7 +88,7 @@
 
   服务升级完成后，会在 v{{nebula.release}} 的安装目录下生成`data`目录，其中包含升级后的数据文件。
 
-4. 在`/usr/local/yueshu-{{nebula.release}}/etc/nebula-meta.conf`中配置`license_manager_url`参数，指定 LM 的路径。
+4. 在`/usr/local/yueshu-{{nebula.release}}/etc/nebula-metad.conf`中配置`license_manager_url`参数，指定 LM 的路径。
 
   LM 用于校验{{nebula.name}}的授权信息，详情参见[LM 配置](../../9.about-license/2.license-management-suite/3.license-manager.md)。
 
