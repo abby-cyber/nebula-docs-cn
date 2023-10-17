@@ -137,7 +137,7 @@
 
         请确保 {{nebula.release}} 集群的 Meta 服务和 Storage 服务的配置文件中的`--data_path`参数设置的存储路径数量与 3.x 集群的配置文件中的`--data_path`参数配置的路径数量相同。否则，升级后的集群无法启动。
 
-2. 备份{{nebula.name}} 3.x 版本的数据目录和二进制文件。
+2. 备份{{nebula.name}} 3.x 版本的数据目录和`bin`目录下的二进制文件.
 
   !!! note
 
@@ -153,7 +153,7 @@
         如果之前没有配置更新，可跳过此步骤。
 
 
-5. 在`nebula-metad.conf`文件中配置`license_manager_url`参数，指定 LM 的路径。
+5. 在{{nebula.name}} v{{nebula.release}} 的`nebula-metad.conf`文件中配置`license_manager_url`参数，指定 LM 的路径。
 
   LM 用于校验{{nebula.name}}的授权信息，详情参见[LM 配置](../../9.about-license/2.license-management-suite/3.license-manager.md)。
 
@@ -214,7 +214,7 @@
   服务升级完成后，会在 v{{nebula.release}} 的安装目录下生成`data`目录，其中包含升级后的数据文件。
 
 
-5. 启动和连接{{nebula.name}} v{{nebula.release}} 服务后，验证数据是否正确。参考命令如下：
+7. 启动和连接{{nebula.name}} v{{nebula.release}} 服务后，验证数据是否正确。参考命令如下：
 
   ```
   nebula> SHOW HOSTS;
