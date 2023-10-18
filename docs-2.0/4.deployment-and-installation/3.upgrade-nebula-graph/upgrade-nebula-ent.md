@@ -10,7 +10,6 @@
 - 数据目录不要使用软连接切换，避免失效。
 - 部分升级操作需要有 sudo 权限。
 - 机器硬盘剩余空间至少需为原数据目录的 1.5 倍。
-- 已知会造成数据丢失的 4 种场景，和 alter schema 以及 default value 相关，参见 [known issues](https://github.com/vesoft-inc/nebula-graph/issues/857)。
 - 升级时不会自动备份原有数据。务必手动备份数据，防止丢失。
 
 ## 升级影响
@@ -42,6 +41,10 @@
 - 全文索引
 
   在升级部署了全文索引的{{nebula.name}}前，需要手动删除 Elasticsearch (ES) 中的全文索引。在升级后需要重新使用`SIGN IN`语句登录 ES 并重新创建全文索引。用户可通过 cURL 命令手动删除 ES 中全文索引。命令为`curl -XDELETE -u <es_username>:<es_password> '<es_access_ip>:<port>/<fullindex_name>'`，例如`curl -XDELETE -u elastic:elastic 'http://192.168.8.223:9200/nebula_index_2534'`。如果 ES 没有设置用户名及密码，则无需指定`-u`选项。 
+
+  !!! note
+
+    升级 3.5.0 及之后版本至 {{nebula.release}}，不需要手动删除全文索引。<!-- 因为3.5.0企业版中，全文索引进行了重构。 -->
 
 
 ## 升级 3.4.0 及以上版本至 {{nebula.release}}
@@ -227,17 +230,15 @@
   nebula> MATCH (v) RETURN v LIMIT 5;
   ```
 
+<!--确认低版本升级{{nebula.release}}是否需要经历3.1.3后，再露出。
 ## 升级历史版本至 {{nebula.release}}
 
 如果用户悦数图数据库版本低于 3.0.0，请先升级到 3.1.3 再升级到 {{nebula.release}}。具体操作请参见[升级{{nebula.name}} 2.x 至 3.1.3](https://docs.nebula-graph.com.cn/3.1.3/4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest/)。
 
 !!! note
 
-    在升级完成并重启服务前，确认已经配置 [LM](../../9.about-license/2.license-management-suite/3.license-manager.md)。
+    在升级完成并重启服务前，确认已经配置 [LM](../../9.about-license/2.license-management-suite/3.license-manager.md)。 -->
 
-## 关于 Docker Compose 部署集群的升级
-
-Docker Compose 部署的{{nebula.name}}建议重新部署新版本后导入数据。
 
 
 
