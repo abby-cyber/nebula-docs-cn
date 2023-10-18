@@ -10,7 +10,7 @@
 - 数据目录不要使用软连接切换，避免失效。
 - 部分升级操作需要有 sudo 权限。
 - 机器硬盘剩余空间至少需为原数据目录的 1.5 倍。
-- 已知会造成数据丢失的 4 种场景，和 alter schema 以及 default value 相关，参见 (known issues)[https://github.com/vesoft-inc/nebula-graph/issues/857]。
+- 已知会造成数据丢失的 4 种场景，和 alter schema 以及 default value 相关，参见 [known issues](https://github.com/vesoft-inc/nebula-graph/issues/857)。
 - 升级时不会自动备份原有数据。务必手动备份数据，防止丢失。
 
 ## 升级影响
