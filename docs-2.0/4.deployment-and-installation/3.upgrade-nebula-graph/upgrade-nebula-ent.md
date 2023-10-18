@@ -230,17 +230,6 @@
   nebula> MATCH (v) RETURN v LIMIT 5;
   ```
 
-<!--确认低版本升级{{nebula.release}}是否需要经历3.1.3后，再露出。
 ## 升级历史版本至 {{nebula.release}}
 
-如果用户悦数图数据库版本低于 3.0.0，请先升级到 3.1.3 再升级到 {{nebula.release}}。具体操作请参见[升级{{nebula.name}} 2.x 至 3.1.3](https://docs.nebula-graph.com.cn/3.1.3/4.deployment-and-installation/3.upgrade-nebula-graph/upgrade-nebula-graph-to-latest/)。
-
-!!! note
-
-    在升级完成并重启服务前，确认已经配置 [LM](../../9.about-license/2.license-management-suite/3.license-manager.md)。 -->
-
-
-
-
-
-  
+如果用户{{nebula.name}}版本低于 3.0.0，升级到 {{nebula.release}} 的操作步骤，可参见上文**升级 3.x（x < 4）至 {{nebula.release}}**。
