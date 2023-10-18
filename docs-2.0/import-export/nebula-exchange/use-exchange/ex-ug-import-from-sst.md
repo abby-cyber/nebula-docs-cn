@@ -8,7 +8,7 @@
 
 - 不支持属性的 Default 值。
 
-- 企业版 Exchange {{exchange.release}}不支持基于 [GEOGRAPHY](../../3.ngql-guide/3.data-types/10.geography.md) 类型的数据生成 SST 文件。
+- 企业版 Exchange {{exchange.release}}不支持基于 [GEOGRAPHY](../../../3.ngql-guide/3.data-types/10.geography.md) 类型的数据生成 SST 文件。
 
 ## 背景信息
 
@@ -38,7 +38,7 @@ SST 文件是一个内部包含了任意长度的有序键值对集合的文件�
 
 1. Reader 从数据源中读取数据。
 
-2. sstProcessor 根据{{nebula.name}}的 Schema 信息生成 SST 文件，然后上传至 HDFS。SST 文件的格式请参见[数据存储格式](../../1.introduction/3.nebula-graph-architecture/4.storage-service.md)。
+2. sstProcessor 根据{{nebula.name}}的 Schema 信息生成 SST 文件，然后上传至 HDFS。SST 文件的格式请参见[数据存储格式](../../../1.introduction/3.nebula-graph-architecture/4.storage-service.md)。
 
 3. sstWriter 打开一个文件并插入数据。生成 SST 文件时，Key 必须按照顺序写入。
 
@@ -79,7 +79,7 @@ SST 文件是一个内部包含了任意长度的有序键值对集合的文件�
 
 开始导入数据之前，用户需要确认以下信息：
 
-- 已经[安装部署{{nebula.name}} {{nebula.release}}](../../4.deployment-and-installation/2.compile-and-install-nebula-graph/2.install-nebula-graph-by-rpm-or-deb.md) 并获取如下信息：
+- 已经[安装部署{{nebula.name}} {{nebula.release}}](../../../4.deployment-and-installation/2.compile-and-install-nebula-graph/2.install-nebula-graph-by-rpm-or-deb.md) 并获取如下信息：
 
   - Graph 服务和 Meta 服务的的 IP 地址和端口。
 
@@ -147,7 +147,7 @@ SST 文件是一个内部包含了任意长度的有序键值对集合的文件�
     nebula> CREATE EDGE serve(start_year int, end_year int);
     ```
 
-更多信息，请参见[快速开始](../../2.quick-start/1.quick-start-overview.md)。
+更多信息，请参见[快速开始](../../../2.quick-start/3.quick-start-on-premise/4.nebula-graph-crud.md)。
 
 ### 步骤 2：处理 CSV 文件
 
@@ -491,8 +491,8 @@ ${SPARK_HOME}/bin/spark-submit  --master "local" --conf spark.sql.shuffle.partit
 LOOKUP ON player YIELD id(vertex);
 ```
 
-用户也可以使用命令 [`SHOW STATS`](../../3.ngql-guide/7.general-query-statements/6.show/14.show-stats.md) 查看统计数据。
+用户也可以使用命令 [`SHOW STATS`](../../../3.ngql-guide/7.general-query-statements/6.show/14.show-stats.md) 查看统计数据。
 
 ### 步骤 7：（如有）在{{nebula.name}}中重建索引
 
-导入数据后，用户可以在{{nebula.name}}中重新创建并重建索引。详情请参见[索引介绍](../../3.ngql-guide/14.native-index-statements/README.md)。
+导入数据后，用户可以在{{nebula.name}}中重新创建并重建索引。详情请参见[索引介绍](../../../3.ngql-guide/14.native-index-statements/README.md)。

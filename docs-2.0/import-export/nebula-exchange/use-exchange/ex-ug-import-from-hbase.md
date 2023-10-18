@@ -1,6 +1,47 @@
-# 导入 Pulsar 数据
+# 导入 HBase 数据
 
-本文简单说明如何使用 Exchange 将存储在 Pulsar 上的数据导入{{nebula.name}}。
+本文以一个示例说明如何使用 Exchange 将存储在 HBase 上的数据导入{{nebula.name}}。
+
+## 数据集
+
+本文以 [basketballplayer 数据集](https://docs-cdn.nebula-graph.com.cn/dataset/dataset.zip)为例。
+
+在本示例中，该数据集已经存入 HBase 中，以`player`、`team`、`follow`和`serve`四个表存储了所有点和边的信息。以下为各个表的部分数据。
+
+```sql
+hbase(main):002:0> scan "player"
+ROW                                COLUMN+CELL
+ player100                         column=cf:age, timestamp=1618881347530, value=42
+ player100                         column=cf:name, timestamp=1618881354604, value=Tim Duncan
+ player101                         column=cf:age, timestamp=1618881369124, value=36
+ player101                         column=cf:name, timestamp=1618881379102, value=Tony Parker
+ player102                         column=cf:age, timestamp=1618881386987, value=33
+ player102                         column=cf:name, timestamp=1618881393370, value=LaMarcus Aldridge
+ player103                         column=cf:age, timestamp=1618881402002, value=32
+ player103                         column=cf:name, timestamp=1618881407882, value=Rudy Gay
+ ...
+
+hbase(main):003:0> scan "team"
+ROW                                COLUMN+CELL
+ team200                           column=cf:name, timestamp=1618881445563, value=Warriors
+ team201                           column=cf:name, timestamp=1618881453636, value=Nuggets
+ ...
+
+hbase(main):004:0> scan "follow"
+ROW                                COLUMN+CELL
+ player100                         column=cf:degree, timestamp=1618881804853, value=95
+ player100                         column=cf:dst_player, timestamp=1618881791522, value=player101
+ player101                         column=cf:degree, timestamp=1618881824685, value=90
+ player101                         column=cf:dst_player, timestamp=1618881816042, value=player102
+ ...
+
+hbase(main):005:0> scan "serve"
+ROW                                COLUMN+CELL
+ player100                         column=cf:end_year, timestamp=1618881899333, value=2016
+ player100                         column=cf:start_year, timestamp=1618881890117, value=1997
+ player100                         column=cf:teamid, timestamp=1618881875739, value=team204
+ ...
+```
 
 ## 环境配置
 
@@ -12,13 +53,15 @@
 
 - Spark：2.4.7，单机版
 
+- HBase：2.2.7
+
 - {{nebula.name}}：{{nebula.release}}。
 
 ## 前提条件
 
 开始导入数据之前，用户需要确认以下信息：
 
-- 已经[安装部署{{nebula.name}}](../../4.deployment-and-installation/2.compile-and-install-nebula-graph/2.install-nebula-graph-by-rpm-or-deb.md) 并获取如下信息：
+- 已经[安装部署{{nebula.name}}](../../../4.deployment-and-installation/2.compile-and-install-nebula-graph/2.install-nebula-graph-by-rpm-or-deb.md) 并获取如下信息：
 
   - Graph 服务和 Meta 服务的的 IP 地址和端口。
 
@@ -29,14 +72,6 @@
 - 已经安装 Spark。
 
 - 了解{{nebula.name}}中创建 Schema 的信息，包括 Tag 和 Edge type 的名称、属性等。
-
-- 已经安装并开启 Pulsar 服务。
-
-## 注意事项
-
-- 导入 Pulsar 数据时只支持 Client 模式，即参数`tags.type.sink`和`edges.type.sink`的值为`client`。
-
-- 导入 Pulsar 数据时请勿使用 Exchange 3.4.0 版本，该版本增加了对导入数据的缓存，不支持流式数据导入。请使用 Exchange 3.0.0、3.3.0、3.5.0 版本。
 
 ## 操作步骤
 
@@ -78,11 +113,11 @@
     nebula> CREATE EDGE serve(start_year int, end_year int);
     ```
 
-更多信息，请参见[快速开始](../../2.quick-start/1.quick-start-overview.md)。
+更多信息，请参见[快速开始](../../../2.quick-start/3.quick-start-on-premise/4.nebula-graph-crud.md)。
 
 ### 步骤 2：修改配置文件
 
-编译 Exchange 后，复制`target/classes/application.conf`文件设置 Pulsar 数据源相关的配置。在本示例中，复制的文件名为`pulsar_application.conf`。各个配置项的详细说明请参见[配置说明](../parameter-reference/ex-ug-parameter.md)。
+编译 Exchange 后，复制`target/classes/application.conf`文件设置 HBase 数据源相关的配置。在本示例中，复制的文件名为`hbase_application.conf`。各个配置项的详细说明请参见[配置说明](../parameter-reference/ex-ug-parameter.md)。
 
 ```conf
 {
@@ -100,21 +135,21 @@
     }
   }
 
-  #{{nebula.name}}相关配置
+  # {{nebula.name}} 相关配置
   nebula: {
     address:{
-      # 以下为{{nebula.name}}的 Graph 服务和 Meta 服务所在机器的 IP 地址及端口。
+      # 以下为 {{nebula.name}} 的 Graph 服务和 Meta 服务所在机器的 IP 地址及端口。
       # 如果有多个地址，格式为 "ip1:port","ip2:port","ip3:port"。
       # 不同地址之间以英文逗号 (,) 隔开。
       graph:["127.0.0.1:9669"]
       #任意一个 Meta 服务的地址。
-      #如果您的{{nebula.name}}在虚拟网络中，如k8s，请配置 Leader Meta的地址。
+      #如果您的 {{nebula.name}} 在虚拟网络中，如k8s，请配置 Leader Meta的地址。
       meta:["127.0.0.1:9559"]
     }
-    # 填写的账号必须拥有{{nebula.name}}相应图空间的写数据权限。
+    # 填写的账号必须拥有 {{nebula.name}} 相应图空间的写数据权限。
     user: root
     pswd: nebula
-    # 填写{{nebula.name}}中需要写入数据的图空间名称。
+    # 填写 {{nebula.name}} 中需要写入数据的图空间名称。
     space: basketballplayer
     connection: {
       timeout: 3000
@@ -135,33 +170,31 @@
   # 处理点
   tags: [
     # 设置 Tag player 相关信息。
+    # 如果需要将 rowkey 设置为数据源，请填写“rowkey”, 列族内的列请填写实际列名。
     {
-      #{{nebula.name}}中对应的 Tag 名称。
+      # {{nebula.name}} 中对应的 Tag 名称。
       name: player
       type: {
-        # 指定数据源文件格式，设置为 Pulsar。
-        source: pulsar
-        # 指定如何将数据导入{{nebula.name}}。只支持 Client。
+        # 指定数据源文件格式，设置为 HBase。
+        source: hbase
+        # 指定如何将点数据导入{{nebula.name}}：Client 或 SST。
         sink: client
       }
-      # Pulsar 服务器地址。
-      service: "pulsar://127.0.0.1:6650"
-      # 连接 pulsar 的 admin.url。
-      admin: "http://127.0.0.1:8081"
-      # Pulsar 的选项，可以从 topic、topics 和 topicsPattern 选择一个进行配置。
-      options: {
-        topics: "topic1,topic2"
-      }
+      host:192.168.*.*
+      port:2181
+      table:"player"
+      columnFamily:"cf"
 
-      # 在 fields 里指定 player 表中的列名称，其对应的 value 会作为{{nebula.name}}中指定属性。
+      # 在 fields 里指定 player 表中的列名称，其对应的 value 会作为 {{nebula.name}} 中指定属性。
       # fields 和 nebula.fields 里的配置必须一一对应。
       # 如果需要指定多个列名称，用英文逗号（,）隔开。
       fields: [age,name]
       nebula.fields: [age,name]
 
-      # 指定表中某一列数据为{{nebula.name}}中点 VID 的来源。
+      # 指定表中某一列数据为 {{nebula.name}} 中点 VID 的来源。
+      # 例如 rowkey 作为 VID 的来源，请填写“rowkey”。
       vertex:{
-          field:playerid
+          field:rowkey
       # udf:{
       #            separator:"_"
       #            oldColNames:[field-0,field-1,field-2]
@@ -179,34 +212,30 @@
       # 批量删除时是否删除该点关联的出边和入边。`writeMode`为`DELETE`时该参数生效。
       #deleteEdge: false
 
-      # 单批次写入{{nebula.name}}的数据条数。
-      batch: 10
+      # 单批次写入 {{nebula.name}} 的数据条数。
+      batch: 256
 
       # Spark 分区数量
-      partition: 10
-      # 读取消息的间隔。单位：秒。
-      interval.seconds: 10
+      partition: 32
     }
     # 设置 Tag team 相关信息。
     {
       name: team
       type: {
-        source: pulsar
+        source: hbase
         sink: client
       }
-      service: "pulsar://127.0.0.1:6650"
-      admin: "http://127.0.0.1:8081"
-      options: {
-        topics: "topic1,topic2"
-      }
+      host:192.168.*.*
+      port:2181
+      table:"team"
+      columnFamily:"cf"
       fields: [name]
       nebula.fields: [name]
       vertex:{
-          field:teamid
+          field:rowkey
       }
-      batch: 10
-      partition: 10
-      interval.seconds: 10
+      batch: 256
+      partition: 32
     }
 
   ]
@@ -215,37 +244,33 @@
   edges: [
     # 设置 Edge type follow 相关信息
     {
-      #{{nebula.name}}中对应的 Edge type 名称。
+      # {{nebula.name}} 中对应的 Edge type 名称。
       name: follow
 
       type: {
-        # 指定数据源文件格式，设置为 Pulsar。
-        source: pulsar
+        # 指定数据源文件格式，设置为 HBase。
+        source: hbase
 
-        # 指定边数据导入{{nebula.name}}的方式，
-        # 指定如何将数据导入{{nebula.name}}。只支持 Client。
+        # 指定边数据导入 {{nebula.name}} 的方式，
+        # 指定如何将点数据导入{{nebula.name}}：Client 或 SST。
         sink: client
       }
 
-      # Pulsar 服务器地址。
-      service: "pulsar://127.0.0.1:6650"
-      # 连接 pulsar 的 admin.url。
-      admin: "http://127.0.0.1:8081"
-      # Pulsar 的选项，可以从 topic、topics 和 topicsPattern 选择一个进行配置。
-      options: {
-        topics: "topic1,topic2"
-      }
+      host:192.168.*.*
+      port:2181
+      table:"follow"
+      columnFamily:"cf"
 
-      # 在 fields 里指定 follow 表中的列名称，其对应的 value 会作为{{nebula.name}}中指定属性。
+      # 在 fields 里指定 follow 表中的列名称，其对应的 value 会作为 {{nebula.name}} 中指定属性。
       # fields 和 nebula.fields 里的配置必须一一对应。
       # 如果需要指定多个列名称，用英文逗号（,）隔开。
       fields: [degree]
       nebula.fields: [degree]
 
-      # 在 source 里，将 follow 表中某一列作为边的起始点数据源。
-      # 在 target 里，将 follow 表中某一列作为边的目的点数据源。
+      # 在 source 里，将 follow 表中某一列作为边的起始点数据源。示例使用 rowkey。
+      # 在 target 里，将 follow 表中某一列作为边的目的点数据源。示例使用列 dst_player。
       source:{
-          field:src_player
+          field:rowkey
       # udf:{
       #            separator:"_"
       #            oldColNames:[field-0,field-1,field-2]
@@ -276,33 +301,29 @@
       # 批量操作类型，包括 INSERT、UPDATE 和 DELETE。默认为 INSERT。
       #writeMode: INSERT
 
-      # 单批次写入{{nebula.name}}的数据条数。
-      batch: 10
+      # 单批次写入 {{nebula.name}} 的数据条数。
+      batch: 256
 
       # Spark 分区数量
-      partition: 10
-
-      # 读取消息的间隔。单位：秒。
-      interval.seconds: 10
+      partition: 32
     }
 
     # 设置 Edge type serve 相关信息
     {
       name: serve
       type: {
-        source: Pulsar
+        source: hbase
         sink: client
       }
-      service: "pulsar://127.0.0.1:6650"
-      admin: "http://127.0.0.1:8081"
-      options: {
-        topics: "topic1,topic2"
-      }
+      host:192.168.*.*
+      port:2181
+      table:"serve"
+      columnFamily:"cf"
 
       fields: [start_year,end_year]
       nebula.fields: [start_year,end_year]
       source:{
-          field:playerid
+          field:rowkey
       }
 
       target:{
@@ -312,9 +333,8 @@
       # 指定一个列作为 rank 的源（可选）。
       #ranking: rank
 
-      batch: 10
-      partition: 10
-      interval.seconds: 10
+      batch: 256
+      partition: 32
     }
   ]
 }
@@ -322,10 +342,10 @@
 
 ### 步骤 3：向{{nebula.name}}导入数据
 
-运行如下命令将 Pulsar 数据导入到{{nebula.name}}中。关于参数的说明，请参见[导入命令参数](../parameter-reference/ex-ug-para-import-command.md)。
+运行如下命令将 HBase 数据导入到{{nebula.name}}中。关于参数的说明，请参见[导入命令参数](../parameter-reference/ex-ug-para-import-command.md)。
 
 ```bash
-${SPARK_HOME}/bin/spark-submit --master "local" --class com.vesoft.nebula.exchange.Exchange <nebula-exchange-{{exchange.release}}.jar_path> -c <pulsar_application.conf_path>
+${SPARK_HOME}/bin/spark-submit --master "local" --class com.vesoft.nebula.exchange.Exchange <nebula-exchange-{{exchange.release}}.jar_path> -c <hbase_application.conf_path>
 ```
 
 !!! note
@@ -335,7 +355,7 @@ ${SPARK_HOME}/bin/spark-submit --master "local" --class com.vesoft.nebula.exchan
 示例：
 
 ```bash
-${SPARK_HOME}/bin/spark-submit  --master "local" --class com.vesoft.nebula.exchange.Exchange  /root/nebula-exchange/nebula-exchange/target/nebula-exchange-{{exchange.release}}.jar  -c /root/nebula-exchange/nebula-exchange/target/classes/pulsar_application.conf
+${SPARK_HOME}/bin/spark-submit  --master "local" --class com.vesoft.nebula.exchange.Exchange  /root/nebula-exchange/nebula-exchange/target/nebula-exchange-{{exchange.release}}.jar  -c /root/nebula-exchange/nebula-exchange/target/classes/hbase_application.conf
 ```
 
 用户可以在返回信息中搜索`batchSuccess.<tag_name/edge_name>`，确认成功的数量。例如`batchSuccess.follow: 300`。
@@ -348,8 +368,8 @@ ${SPARK_HOME}/bin/spark-submit  --master "local" --class com.vesoft.nebula.excha
 LOOKUP ON player YIELD id(vertex);
 ```
 
-用户也可以使用命令 [`SHOW STATS`](../../3.ngql-guide/7.general-query-statements/6.show/14.show-stats.md) 查看统计数据。
+用户也可以使用命令 [`SHOW STATS`](../../../3.ngql-guide/7.general-query-statements/6.show/14.show-stats.md) 查看统计数据。
 
 ### 步骤 5：（如有）在{{nebula.name}}中重建索引
 
-导入数据后，用户可以在{{nebula.name}}中重新创建并重建索引。详情请参见[索引介绍](../../3.ngql-guide/14.native-index-statements/README.md)。
+导入数据后，用户可以在{{nebula.name}}中重新创建并重建索引。详情请参见[索引介绍](../../../3.ngql-guide/14.native-index-statements/README.md)。

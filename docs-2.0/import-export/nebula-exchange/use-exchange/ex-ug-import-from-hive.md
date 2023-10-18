@@ -1,50 +1,52 @@
-# 导入 MySQL/PostgreSQL 数据
+# 导入 Hive 数据
 
-本文以一个示例说明如何使用 Exchange 将存储在 MySQL 上的数据导入{{nebula.name}}，也适用于从 PostgreSQL 导出数据到{{nebula.name}}。
+本文以一个示例说明如何使用 Exchange 将存储在 Hive 上的数据导入{{nebula.name}}。
 
 ## 数据集
 
 本文以 [basketballplayer 数据集](https://docs-cdn.nebula-graph.com.cn/dataset/dataset.zip)为例。
 
-在本示例中，该数据集已经存入 MySQL 中名为`basketball`的数据库中，以`player`、`team`、`follow`和`serve`四个表存储了所有点和边的信息。以下为各个表的结构。
+在本示例中，该数据集已经存入 Hive 中名为`basketball`的数据库中，以`player`、`team`、`follow`和`serve`四个表存储了所有点和边的信息。以下为各个表的结构。
 
 ```sql
-mysql> desc player;
-+----------+-------------+------+-----+---------+-------+
-| Field    | Type        | Null | Key | Default | Extra |
-+----------+-------------+------+-----+---------+-------+
-| playerid | varchar(30) | YES  |     | NULL    |       |
-| age      | int         | YES  |     | NULL    |       |
-| name     | varchar(30) | YES  |     | NULL    |       |
-+----------+-------------+------+-----+---------+-------+
+scala> spark.sql("describe basketball.player").show
++--------+---------+-------+
+|col_name|data_type|comment|
++--------+---------+-------+
+|playerid|   string|   null|
+|     age|   bigint|   null|
+|    name|   string|   null|
++--------+---------+-------+
 
-mysql> desc team;
-+--------+-------------+------+-----+---------+-------+
-| Field  | Type        | Null | Key | Default | Extra |
-+--------+-------------+------+-----+---------+-------+
-| teamid | varchar(30) | YES  |     | NULL    |       |
-| name   | varchar(30) | YES  |     | NULL    |       |
-+--------+-------------+------+-----+---------+-------+
+scala> spark.sql("describe basketball.team").show
++----------+---------+-------+
+|  col_name|data_type|comment|
++----------+---------+-------+
+|    teamid|   string|   null|
+|      name|   string|   null|
++----------+---------+-------+
 
-mysql> desc follow;
-+------------+-------------+------+-----+---------+-------+
-| Field      | Type        | Null | Key | Default | Extra |
-+------------+-------------+------+-----+---------+-------+
-| src_player | varchar(30) | YES  |     | NULL    |       |
-| dst_player | varchar(30) | YES  |     | NULL    |       |
-| degree     | int         | YES  |     | NULL    |       |
-+------------+-------------+------+-----+---------+-------+
+scala> spark.sql("describe basketball.follow").show
++----------+---------+-------+
+|  col_name|data_type|comment|
++----------+---------+-------+
+|src_player|   string|   null|
+|dst_player|   string|   null|
+|    degree|   bigint|   null|
++----------+---------+-------+
 
-mysql> desc serve;
-+------------+-------------+------+-----+---------+-------+
-| Field      | Type        | Null | Key | Default | Extra |
-+------------+-------------+------+-----+---------+-------+
-| playerid   | varchar(30) | YES  |     | NULL    |       |
-| teamid     | varchar(30) | YES  |     | NULL    |       |
-| start_year | int         | YES  |     | NULL    |       |
-| end_year   | int         | YES  |     | NULL    |       |
-+------------+-------------+------+-----+---------+-------+
+scala> spark.sql("describe basketball.serve").show
++----------+---------+-------+
+|  col_name|data_type|comment|
++----------+---------+-------+
+|  playerid|   string|   null|
+|    teamid|   string|   null|
+|start_year|   bigint|   null|
+|  end_year|   bigint|   null|
++----------+---------+-------+
 ```
+
+> **说明**：Hive 的数据类型`bigint`与{{nebula.name}}的`int`对应。
 
 ## 环境配置
 
@@ -56,7 +58,7 @@ mysql> desc serve;
 
 - Spark：2.4.7，单机版
 
-- MySQL： 8.0.23
+- Hive：2.3.7，Hive Metastore 数据库为 MySQL 8.0.22
 
 - {{nebula.name}}：{{nebula.release}}。
 
@@ -64,7 +66,7 @@ mysql> desc serve;
 
 开始导入数据之前，用户需要确认以下信息：
 
-- 已经[安装部署{{nebula.name}}](../../4.deployment-and-installation/2.compile-and-install-nebula-graph/2.install-nebula-graph-by-rpm-or-deb.md) 并获取如下信息：
+- 已经[安装部署{{nebula.name}}](../../../4.deployment-and-installation/2.compile-and-install-nebula-graph/2.install-nebula-graph-by-rpm-or-deb.md) 并获取如下信息：
 
   - Graph 服务和 Meta 服务的的 IP 地址和端口。
 
@@ -74,15 +76,9 @@ mysql> desc serve;
 
 - 已经安装 Spark。
 
-- [mysql-connector-java-xxx.jar](https://mvnrepository.com/artifact/mysql/mysql-connector-java) 已经下载并放置在 Spark 的`SPARK_HOME/jars`目录下。
-
 - 了解{{nebula.name}}中创建 Schema 的信息，包括 Tag 和 Edge type 的名称、属性等。
 
-- 已经安装并开启 Hadoop 服务。
-
-## 注意事项
-
-nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
+- 已经启动 Hive Metastore 数据库（本示例中为 MySQL）。
 
 ## 操作步骤
 
@@ -124,11 +120,37 @@ nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
     nebula> CREATE EDGE serve(start_year int, end_year int);
     ```
 
-更多信息，请参见[快速开始](../../2.quick-start/1.quick-start-overview.md)。
+更多信息，请参见[快速开始](../../../2.quick-start/3.quick-start-on-premise/4.nebula-graph-crud.md)。
 
-### 步骤 2：修改配置文件
+### 步骤 2：使用 Spark SQL 确认 Hive SQL 语句
 
-编译 Exchange 后，复制`target/classes/application.conf`文件设置 MySQL 数据源相关的配置。在本示例中，复制的文件名为`mysql_application.conf`。各个配置项的详细说明请参见[配置说明](../parameter-reference/ex-ug-parameter.md)。
+启动 spark-shell 环境后，依次运行以下语句，确认 Spark 能读取 Hive 中的数据。
+
+```sql
+scala> sql("select playerid, age, name from basketball.player").show
+scala> sql("select teamid, name from basketball.team").show
+scala> sql("select src_player, dst_player, degree from basketball.follow").show
+scala> sql("select playerid, teamid, start_year, end_year from basketball.serve").show
+```
+
+以下为表`basketball.player`中读出的结果。
+
+```mysql
++---------+----+-----------------+
+| playerid| age|             name|
++---------+----+-----------------+
+|player100|  42|       Tim Duncan|
+|player101|  36|      Tony Parker|
+|player102|  33|LaMarcus Aldridge|
+|player103|  32|         Rudy Gay|
+|player104|  32|  Marco Belinelli|
++---------+----+-----------------+
+...
+```
+
+### 步骤 3：修改配置文件
+
+编译 Exchange 后，复制`target/classes/application.conf`文件设置 Hive 数据源相关的配置。在本示例中，复制的文件名为`hive_application.conf`。各个配置项的详细说明请参见[配置说明](../parameter-reference/ex-ug-parameter.md)。
 
 ```conf
 {
@@ -146,10 +168,19 @@ nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
     }
   }
 
-# {{nebula.name}} 相关配置
+  # 如果 Spark 和 Hive 部署在不同集群，才需要配置连接 Hive 的参数，否则请忽略这些配置。
+  #hive: {
+  #  waredir: "hdfs://NAMENODE_IP:9000/apps/svr/hive-xxx/warehouse/"
+  #  connectionURL: "jdbc:mysql://your_ip:3306/hive_spark?characterEncoding=UTF-8"
+  #  connectionDriverName: "com.mysql.jdbc.Driver"
+  #  connectionUserName: "user"
+  #  connectionPassword: "password"
+  #}
+
+  # {{nebula.name}} 相关配置
   nebula: {
     address:{
-      # 以下为 {{nebula.name}} 的 Graph 服务和 Meta 服务所在机器的 IP 地址及端口。
+      # 以下为 {{nebula.name}} 的 Graph 服务和所有 Meta 服务所在机器的 IP 地址及端口。
       # 如果有多个地址，格式为 "ip1:port","ip2:port","ip3:port"。
       # 不同地址之间以英文逗号 (,) 隔开。
       graph:["127.0.0.1:9669"]
@@ -185,27 +216,14 @@ nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
       # {{nebula.name}} 中对应的 Tag 名称。
       name: player
       type: {
-        # 指定数据源文件格式，设置为 MySQL。
-        source: mysql
+        # 指定数据源文件格式，设置为 hive。
+        source: hive
         # 指定如何将点数据导入{{nebula.name}}：Client 或 SST。
         sink: client
       }
 
-      host:192.168.*.*
-      port:3306
-      user:"test"
-      password:"123456"
-      database:"basketball"
-
-      # 扫描单个表读取数据。
-      # nebula-exchange_spark_2.2 必须配置该参数。不支持配置 sentence。
-      # nebula-exchange_spark_2.4 和 nebula-exchange_spark_3.0 可以配置该参数，但是不能和 sentence 同时配置。
-      table:"basketball.player"
-
-      # 通过查询语句读取数据。
-      # nebula-exchange_spark_2.2 不支持该参数。
-      # nebula-exchange_spark_2.4 和 nebula-exchange_spark_3.0 可以配置该参数，但是不能和 table 同时配置。支持多表查询。
-      # sentence: "select * from  people, player, team"
+      # 设置读取数据库 basketball 中 player 表数据的 SQL 语句
+      exec: "select playerid, age, name from basketball.player"
 
       # 在 fields 里指定 player 表中的列名称，其对应的 value 会作为 {{nebula.name}} 中指定属性。
       # fields 和 nebula.fields 里的配置必须一一对应。
@@ -214,7 +232,7 @@ nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
       nebula.fields: [age,name]
 
       # 指定表中某一列数据为 {{nebula.name}} 中点 VID 的来源。
-      vertex: {
+      vertex:{
         field:playerid
       # udf:{
       #            separator:"_"
@@ -233,7 +251,7 @@ nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
       # 批量删除时是否删除该点关联的出边和入边。`writeMode`为`DELETE`时该参数生效。
       #deleteEdge: false
 
-      # 单批次写入 {{nebula.name}} 的数据条数。
+      # 单批次写入 {{nebula.name}} 的最大数据条数。
       batch: 256
 
       # Spark 分区数量
@@ -243,18 +261,10 @@ nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
     {
       name: team
       type: {
-        source: mysql
+        source: hive
         sink: client
       }
-
-      host:192.168.*.*
-      port:3306
-      database:"basketball"
-      table:"team"
-      user:"test"
-      password:"123456"
-      sentence:"select teamid, name from team order by teamid"
-
+      exec: "select teamid, name from basketball.team"
       fields: [name]
       nebula.fields: [name]
       vertex: {
@@ -274,29 +284,16 @@ nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
       name: follow
 
       type: {
-        # 指定数据源文件格式，设置为 MySQL。
-        source: mysql
+        # 指定数据源文件格式，设置为 hive。
+        source: hive
 
         # 指定边数据导入 {{nebula.name}} 的方式，
         # 指定如何将点数据导入{{nebula.name}}：Client 或 SST。
         sink: client
       }
 
-      host:192.168.*.*
-      port:3306
-      user:"test"
-      password:"123456"
-      database:"basketball"
-
-      # 扫描单个表读取数据。
-      # nebula-exchange_spark_2.2 必须配置该参数。不支持配置 sentence。
-      # nebula-exchange_spark_2.4 和 nebula-exchange_spark_3.0 可以配置该参数，但是不能和 sentence 同时配置。
-      table:"basketball.follow"
-
-      # 通过查询语句读取数据。
-      # nebula-exchange_spark_2.2 不支持该参数。
-      # nebula-exchange_spark_2.4 和 nebula-exchange_spark_3.0 可以配置该参数，但是不能和 table 同时配置。支持多表查询。
-      # sentence: "select * from  follow, serve"
+      # 设置读取数据库 basketball 中 follow 表数据的 SQL 语句。
+      exec: "select src_player, dst_player, degree from basketball.follow"
 
       # 在 fields 里指定 follow 表中的列名称，其对应的 value 会作为 {{nebula.name}} 中指定属性。
       # fields 和 nebula.fields 里的配置必须一一对应。
@@ -338,7 +335,7 @@ nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
       # 批量操作类型，包括 INSERT、UPDATE 和 DELETE。默认为 INSERT。
       #writeMode: INSERT
 
-      # 单批次写入 {{nebula.name}} 的数据条数。
+      # 单批次写入 {{nebula.name}} 的最大数据条数。
       batch: 256
 
       # Spark 分区数量
@@ -349,17 +346,10 @@ nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
     {
       name: serve
       type: {
-        source: mysql
+        source: hive
         sink: client
       }
-
-      host:192.168.*.*
-      port:3306
-      database:"basketball"
-      table:"serve"
-      user:"test"
-      password:"123456"
-      sentence:"select playerid,teamid,start_year,end_year from serve order by playerid"
+      exec: "select playerid, teamid, start_year, end_year from basketball.serve"
       fields: [start_year,end_year]
       nebula.fields: [start_year,end_year]
       source: {
@@ -379,12 +369,12 @@ nebula-exchange_spark_2.2 仅支持单表查询，不支持多表查询。
 }
 ```
 
-### 步骤 3：向{{nebula.name}}导入数据
+### 步骤 4：向{{nebula.name}}导入数据
 
-运行如下命令将 MySQL 数据导入到{{nebula.name}}中。关于参数的说明，请参见[导入命令参数](../parameter-reference/ex-ug-para-import-command.md)。
+运行如下命令将 Hive 数据导入到{{nebula.name}}中。关于参数的说明，请参见[导入命令参数](../parameter-reference/ex-ug-para-import-command.md)。
 
 ```bash
-${SPARK_HOME}/bin/spark-submit --master "local" --class com.vesoft.nebula.exchange.Exchange <nebula-exchange-{{exchange.release}}.jar_path> -c <mysql_application.conf_path>
+${SPARK_HOME}/bin/spark-submit --master "local" --class com.vesoft.nebula.exchange.Exchange <nebula-exchange-{{exchange.release}}.jar_path> -c <hive_application.conf_path> -h
 ```
 
 !!! note
@@ -394,12 +384,12 @@ ${SPARK_HOME}/bin/spark-submit --master "local" --class com.vesoft.nebula.exchan
 示例：
 
 ```bash
-${SPARK_HOME}/bin/spark-submit  --master "local" --class com.vesoft.nebula.exchange.Exchange  /root/nebula-exchange/nebula-exchange/target/nebula-exchange-{{exchange.release}}.jar  -c /root/nebula-exchange/nebula-exchange/target/classes/mysql_application.conf
+${SPARK_HOME}/bin/spark-submit  --master "local" --class com.vesoft.nebula.exchange.Exchange  /root/nebula-exchange/nebula-exchange/target/nebula-exchange-{{exchange.release}}.jar  -c /root/nebula-exchange/nebula-exchange/target/classes/hive_application.conf -h
 ```
 
 用户可以在返回信息中搜索`batchSuccess.<tag_name/edge_name>`，确认成功的数量。例如`batchSuccess.follow: 300`。
 
-### 步骤 4：（可选）验证数据
+### 步骤 5：（可选）验证数据
 
 用户可以在{{nebula.name}}客户端（例如 NebulaGraph Studio）中执行查询语句，确认数据是否已导入。例如：
 
@@ -407,8 +397,8 @@ ${SPARK_HOME}/bin/spark-submit  --master "local" --class com.vesoft.nebula.excha
 LOOKUP ON player YIELD id(vertex);
 ```
 
-用户也可以使用命令 [`SHOW STATS`](../../3.ngql-guide/7.general-query-statements/6.show/14.show-stats.md) 查看统计数据。
+用户也可以使用命令 [`SHOW STATS`](../../../3.ngql-guide/7.general-query-statements/6.show/14.show-stats.md) 查看统计数据。
 
-### 步骤 5：（如有）在{{nebula.name}}中重建索引
+### 步骤 6：（如有）在{{nebula.name}}中重建索引
 
-导入数据后，用户可以在{{nebula.name}}中重新创建并重建索引。详情请参见[索引介绍](../../3.ngql-guide/14.native-index-statements/README.md)。
+导入数据后，用户可以在{{nebula.name}}中重新创建并重建索引。详情请参见[索引介绍](../../../3.ngql-guide/14.native-index-statements/README.md)。
