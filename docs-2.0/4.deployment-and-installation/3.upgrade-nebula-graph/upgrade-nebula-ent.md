@@ -104,13 +104,13 @@
 
         如果启动异常，放弃本次升级，并联系售后人员。
 
-5. 启动所有 Graph 和 Storage 服务。
+6. 启动所有 Graph 和 Storage 服务。
 
   !!! note
 
         如果启动异常，放弃本次升级，并联系售后人员。
 
-6. 连接新版{{nebula.name}}，验证服务是否可用、数据是否正常。连接方法参见[连接服务](../connect-to-nebula-graph.md)。
+7. 连接新版{{nebula.name}}，验证服务是否可用、数据是否正常。连接方法参见[连接服务](../connect-to-nebula-graph.md)。
 
   测试升级成功的参考命令如下：
 
